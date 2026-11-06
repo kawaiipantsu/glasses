@@ -20,3 +20,6 @@ build/native/
 *.p12
 *.pfx
 /github_master_token.txt
+
+.version.lock
+build/build-info.json

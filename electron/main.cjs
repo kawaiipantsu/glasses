@@ -26,6 +26,7 @@ const { Engine, requestSchema } = require('../core/engine.cjs');
 const { inspectHeaders, inspectTLS } = require('../core/inspectors.cjs');
 const { decodedBody, toHar } = require('../core/formats.cjs');
 const { createDemo } = require('../core/demo.cjs');
+const releaseInfo = require('../core/version.cjs');
 const { PLUGIN_CSP, pluginDocument } = require('../core/plugin-document.cjs');
 const { trustedSender, SecurityLog } = require('../core/security.cjs');
 protocol.registerSchemesAsPrivileged([
@@ -192,7 +193,7 @@ function createWindow() {
     height: 980,
     minWidth: 1050,
     minHeight: 700,
-    title: 'Glasses · THUGSred',
+    title: `Glasses ${releaseInfo.displayVersion} · THUGSred`,
     icon: appIcon,
     backgroundColor: '#14161b',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
@@ -234,6 +235,13 @@ function createWindow() {
 const initialInstallUri = process.argv.find((x) => x.startsWith('glasses:'));
 if (initialInstallUri && instanceLock) queueInstall(initialInstallUri);
 app.whenReady().then(async () => {
+  app.setAboutPanelOptions({
+    applicationName: 'Glasses',
+    applicationVersion: releaseInfo.version,
+    version: String(releaseInfo.build),
+    website: 'https://glasses.thugs.red',
+    copyright: 'THUGSred',
+  });
   if (!instanceLock) return;
   app.dock?.setIcon(appIcon);
   const root = path.resolve(__dirname, '../dist');
@@ -345,6 +353,15 @@ app.whenReady().then(async () => {
             platform: process.platform,
             testMode: Boolean(process.env.GLASSES_TEST_DATA),
             version: app.getVersion(),
+            build: releaseInfo.build,
+            displayVersion: releaseInfo.displayVersion,
+            buildInfo: {
+              sourceRevision: releaseInfo.sourceRevision,
+              sourceSha256: releaseInfo.sourceSha256,
+              builtAt: releaseInfo.builtAt,
+            },
+            documentation: releaseInfo.documentation,
+            architecture: process.arch,
             dataPath: dir,
             warning: settings.warning,
             installIntent,
@@ -601,7 +618,16 @@ app.whenReady().then(async () => {
           return await writeDialog(
             'research.glasses.json',
             JSON.stringify(
-              { format: 'glasses', version: 1, records: [...engine.records.values()] },
+              {
+                format: 'glasses',
+                version: 1,
+                creator: {
+                  name: 'THUGSred Glasses',
+                  version: releaseInfo.version,
+                  build: releaseInfo.build,
+                },
+                records: [...engine.records.values()],
+              },
               null,
               2,
             ),
@@ -704,6 +730,7 @@ app.whenReady().then(async () => {
     {
       label: 'Glasses',
       submenu: [
+        { role: 'about' },
         {
           label: 'Settings…',
           accelerator: 'CmdOrCtrl+,',

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "application": {
+    "version": "0.8.1",
+    "build": 33
+  },
+  "documentation": {
+    "version": "1.0.0",
+    "build": 1,
+    "applicationVersion": "0.8.1",
+    "applicationBuild": 33
+  }
+}

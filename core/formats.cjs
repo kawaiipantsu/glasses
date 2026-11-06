@@ -1,3 +1,4 @@
+const releaseInfo = require('./version.cjs');
 const zlib = require('node:zlib');
 const { promisify } = require('node:util');
 const decoders = {
@@ -52,7 +53,12 @@ function toHar(records) {
   return {
     log: {
       version: '1.2',
-      creator: { name: 'THUGSred Glasses', version: '0.1.0' },
+      creator: {
+        name: 'THUGSred Glasses',
+        version: releaseInfo.version,
+        _build: releaseInfo.build,
+        comment: releaseInfo.displayVersion,
+      },
       entries: records
         .filter((r) => /^https?:/.test(r.url))
         .map((r) => ({

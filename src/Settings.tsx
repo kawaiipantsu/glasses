@@ -749,17 +749,47 @@ export default function Settings({
                 debugging, and understanding what moves across the wire.
               </p>
               <Pill>
-                Glasses {data.version} · {data.platform}
+                Glasses {data.displayVersion} · {data.platform} {data.architecture}
               </Pill>
               <div className="about-details">
                 <p>Built for macOS, Windows, and Linux with Electron and Node.js.</p>
                 <p>
+                  Documentation baseline: {data.documentation.version} ({data.documentation.build})
+                  · covers Glasses {data.documentation.applicationVersion} (
+                  {data.documentation.applicationBuild})
+                </p>
+                {data.buildInfo.builtAt && (
+                  <p>Build prepared: {new Date(data.buildInfo.builtAt).toLocaleString()}</p>
+                )}
+                {data.buildInfo.sourceSha256 && (
+                  <p className="mono" title={data.buildInfo.sourceSha256}>
+                    Source: {data.buildInfo.sourceSha256.slice(0, 16)}
+                  </p>
+                )}
+                <button
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(
+                      [
+                        `Glasses ${data.displayVersion}`,
+                        `${data.platform} ${data.architecture}`,
+                        `Documentation ${data.documentation.version} (${data.documentation.build})`,
+                        `Source SHA-256: ${data.buildInfo.sourceSha256 || 'development checkout'}`,
+                        `Source revision: ${data.buildInfo.sourceRevision || 'not recorded'}`,
+                        `Build prepared: ${data.buildInfo.builtAt || 'not recorded'}`,
+                      ].join('\n'),
+                    );
+                    notify('Version information copied');
+                  }}
+                >
+                  Copy version information
+                </button>
+                <p>
                   <CommunityName /> · Danish hacking community
                 </p>
                 <p className="muted">
-                  0.1 supports HTTP/1.1 inspection, HTTPS MITM, SOCKS5 TCP tunnels, and WebSocket
-                  upgrade passthrough. HTTP/2, HTTP/3, and WebSocket frame editing are not yet
-                  implemented.
+                  This release supports HTTP/1.1 inspection, HTTPS MITM, SOCKS5 TCP tunnels, and
+                  WebSocket upgrade passthrough. HTTP/2, HTTP/3, and WebSocket frame editing are not
+                  yet implemented.
                 </p>
               </div>
             </div>

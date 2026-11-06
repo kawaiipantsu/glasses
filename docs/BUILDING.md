@@ -83,3 +83,7 @@ Automated test profiles cannot change system routing. Use a dedicated test machi
 The central builder deliberately disables automatic certificate discovery and produces unsigned development packages. Authenticated distribution needs a separate signing step or an explicitly configured signed build. macOS requires Developer ID signing and notarization; Windows requires a code-signing identity. Keep signing credentials outside the repository and worker snapshots. See electron-builder's [signing documentation](https://www.electron.build/code-signing) and [multi-platform guidance](https://www.electron.build/multi-platform-build).
 
 See [release notes](RELEASE_NOTES.md) for actual test results, not just configured targets.
+
+## Versioned builds
+
+Application and documentation use independent semantic versions and monotonically increasing build counters. See [version policy and commands](VERSIONING.md) and [historical build audit](BUILD_HISTORY.json). `release:all` reserves one app build for the whole platform matrix; use `-- --current` only to build an already reserved identity. Versioned artifact manifests include hashes, sizes and source identity. Never replace a published build with different bytes.

@@ -57,6 +57,15 @@ try {
   if (!page) page = await context.waitForEvent('page');
   await page.getByRole('heading', { name: 'Traffic', exact: true }).waitFor();
   assert.match(page.url(), /^glasses:\/\/app\/index.html/, 'release ignores GLASSES_DEV_URL');
+  const expectedVersion = JSON.parse(fs.readFileSync(path.join(root, 'version.json'))).application;
+  const identity = await page.evaluate(() => window.glasses.invoke('bootstrap'));
+  assert.equal(identity.displayVersion, `${expectedVersion.version} (${expectedVersion.build})`);
+  assert.equal(identity.architecture, process.arch);
+  assert.match(identity.buildInfo.sourceSha256, /^[a-f0-9]{64}$/);
+  await page
+    .locator('.statusbar')
+    .getByText(`v${identity.displayVersion}`, { exact: true })
+    .waitFor();
   await page.getByRole('button', { name: 'Local lab', exact: true }).click();
   await page.waitForFunction(
     () => document.querySelectorAll('.traffic-table tbody tr').length === 6,
@@ -83,6 +92,14 @@ try {
   await page.getByRole('button', { name: 'Open Settings' }).click();
   await page.getByRole('button', { name: 'Appearance', exact: true }).click();
   await page.screenshot({ path: path.join(output, 'glasses-packaged-settings.png') });
+  await page.getByRole('button', { name: 'About Glasses', exact: true }).click();
+  await page
+    .getByText(
+      `Glasses ${identity.displayVersion} · ${identity.platform} ${identity.architecture}`,
+      { exact: true },
+    )
+    .waitFor();
+  await page.screenshot({ path: path.join(output, 'glasses-version-about.png') });
   await page.evaluate(() => window.glasses.invoke('stop'));
   console.log(
     'Hardened packaged app passed: ASAR startup, production origin, proxy traffic, extension tool and Settings.',

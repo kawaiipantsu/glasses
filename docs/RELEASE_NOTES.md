@@ -1,4 +1,6 @@
-# Glasses 0.1.0
+# Glasses 0.8.1 (33)
+
+Documentation: **1.0.0 (1)**. Build 33 continues 32 recovered successful historical build runs. See [version policy and development milestones](VERSIONING.md). Earlier 0.1.0 packages were unnumbered development builds; the milestone map does not claim they were separately published releases.
 
 First local development release, 6 November 2026.
 
@@ -6,7 +8,7 @@ The implementation follows the approved charcoal/red design with a dedicated Set
 
 ## Verification
 
-- Node integration/security suite: **48 passing tests**, covering actual local HTTP and HTTPS, CONNECT MITM, request/response interception and mutation, drop handling, oversized response streaming, decompression/HAR, rewrite/plugin behavior, replay payload iteration/cancellation, fragmented SOCKS5 negotiation, upstream TLS inspection, header findings, IPC caller validation, hostile property names, decompression bombs and private metadata logs.
+- Node integration/security suite: **51 passing tests**, covering actual local HTTP and HTTPS, CONNECT MITM, request/response interception and mutation, drop handling, oversized response streaming, decompression/HAR, rewrite/plugin behavior, replay payload iteration/cancellation, fragmented SOCKS5 negotiation, upstream TLS inspection, header findings, IPC caller validation, hostile property names, decompression bombs and private metadata logs.
 - Desktop smoke: launched Electron on macOS arm64, loaded real local lab traffic, inspected bodies, opened response context menus and transformation previews, changed light/dark settings, replayed and fuzzed requests, visited Timeline/Header Hardening, installed/enabled a custom tool extension, and tested its isolation and Repeater/context-menu handoffs.
 - Hardened packaged app: ARM64 ASAR startup, production origin despite a development URL environment variable, real local proxy traffic, custom extension tool and Settings passed. Native mouse activation inside the extension was also checked in the packaged app.
 - Dependency audit: **0 known vulnerabilities** in the checked runtime and development lockfile. Scoped minimatch overrides avoid a build-tool glob denial-of-service advisory without changing old minimatch consumers to an incompatible API. Unused direct dependencies were removed.

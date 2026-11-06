@@ -1,0 +1,277 @@
+{
+  "counted": [
+    {
+      "timestamp": "2026-11-06T11:39:59.591Z",
+      "commandId": "exec-f8ad3d6c-5bb5-41a2-ae1e-749e19a2edd1",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T11:40:48.668Z",
+      "commandId": "exec-9c6633d2-f39d-4de0-b478-bb3acd16c4fe",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T11:49:00.885Z",
+      "commandId": "exec-2552f0a9-0565-4ac9-8308-43c0b695537e",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T12:00:58.297Z",
+      "commandId": "exec-6e64c155-11c9-4278-85bf-a52a65367d7d",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T12:05:00.377Z",
+      "commandId": "exec-bc4da426-a9e5-4a6e-a132-ed3d07d9885a",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run security:check"
+    },
+    {
+      "timestamp": "2026-11-06T12:06:32.221Z",
+      "commandId": "exec-84f5a52a-9477-40d7-a97e-96189fd541e1",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T12:30:15.883Z",
+      "commandId": "exec-76b1a4c8-88e4-472d-8d58-f7b844da845b",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T12:31:10.183Z",
+      "commandId": "exec-53f1b81f-badb-494e-9ed2-1d3965a4db08",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T12:32:23.787Z",
+      "commandId": "exec-3e08ccc8-b8c3-4a7f-a503-9933ffa5a5e1",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T12:46:37.097Z",
+      "commandId": "exec-6b9d1cec-9e3a-4314-935f-55fdc5647f34",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T12:49:58.431Z",
+      "commandId": "exec-2a24f270-5f69-4699-9a1f-4e96eb4c4d33",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T12:53:33.169Z",
+      "commandId": "exec-04feb327-dfa6-43fd-85e0-95c63b58aea9",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T13:01:18.566Z",
+      "commandId": "exec-40330e34-0bb2-4f2e-8500-c7c38a573781",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T13:03:28.998Z",
+      "commandId": "exec-6ee04c93-9a2f-4d01-b33a-b1fb86052824",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T13:10:59.662Z",
+      "commandId": "exec-d44b9e69-fb76-4092-bf7f-40ce4cf2a343",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T13:17:18.635Z",
+      "commandId": "exec-4a3f4271-799c-4201-82d5-87f0cb6f050e",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T13:18:33.521Z",
+      "commandId": "exec-993bce71-106e-4b0f-a279-e41ebcaf1fa1",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run release:linux"
+    },
+    {
+      "timestamp": "2026-11-06T13:22:39.223Z",
+      "commandId": "exec-0dc46882-839d-4bdc-97ff-2a71f1865a79",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run release:linux"
+    },
+    {
+      "timestamp": "2026-11-06T13:34:05.462Z",
+      "commandId": "exec-1a2ea13a-8a8e-431b-8aba-579595e67ca4",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T13:38:05.293Z",
+      "commandId": "exec-073a0e64-fc30-4a24-a044-0851277607bd",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run release:windows"
+    },
+    {
+      "timestamp": "2026-11-06T13:50:40.634Z",
+      "commandId": "exec-1513dac3-31f5-43a2-bb3c-68445f8cac5a",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T13:51:33.032Z",
+      "commandId": "exec-9c92cd2f-e51c-425f-83ee-dc62459981eb",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run release:windows"
+    },
+    {
+      "timestamp": "2026-11-06T13:52:52.467Z",
+      "commandId": "exec-c7a02489-20c1-4222-ac43-1146ebb5571f",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T14:00:10.192Z",
+      "commandId": "exec-4a0961f3-6e75-46e3-8a60-28fe7f0b9f14",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T14:13:55.183Z",
+      "commandId": "exec-f0b3550b-3dfb-4ae7-af96-09d95dccb217",
+      "observedCompiles": 3,
+      "exitCode": 0,
+      "command": "npm run release:all"
+    },
+    {
+      "timestamp": "2026-11-06T14:14:38.365Z",
+      "commandId": "exec-4f4dbda9-771b-470c-8a15-7cf7d923f592",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T14:22:29.779Z",
+      "commandId": "exec-bed002a9-9f5f-42be-84e1-7b57505e0a52",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T14:23:22.252Z",
+      "commandId": "exec-f107f76e-c910-432f-ac99-a3ffe9672312",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T14:24:44.946Z",
+      "commandId": "exec-2d5af7b4-50f4-44b9-adfe-5425876df635",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T14:25:43.061Z",
+      "commandId": "exec-be3baaa9-0556-4135-81cc-dc2a2576b86b",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T14:39:35.244Z",
+      "commandId": "exec-363be672-4942-4510-8bde-95e9d9c328ac",
+      "observedCompiles": 3,
+      "exitCode": 0,
+      "command": "npm run release:all"
+    },
+    {
+      "timestamp": "2026-11-06T16:44:36.814Z",
+      "commandId": "exec-957c4cf2-30fc-4759-bd86-d040db893609",
+      "observedCompiles": 1,
+      "exitCode": 0,
+      "command": "npm run check"
+    }
+  ],
+  "excludedFailed": [
+    {
+      "timestamp": "2026-11-06T11:45:54.202Z",
+      "commandId": "exec-b2fe82f1-c659-4e69-834a-04a6469fd13f",
+      "observedCompiles": 1,
+      "exitCode": 1,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T12:54:26.325Z",
+      "commandId": "exec-3d2649ff-005f-43fd-b3b2-b6f8c462a359",
+      "observedCompiles": 1,
+      "exitCode": 1,
+      "command": "npm run dist:mac"
+    },
+    {
+      "timestamp": "2026-11-06T13:02:21.137Z",
+      "commandId": "exec-3b959bbd-e050-43d2-8569-b2a6c195fbb4",
+      "observedCompiles": 1,
+      "exitCode": 1,
+      "command": "npm run build"
+    },
+    {
+      "timestamp": "2026-11-06T13:40:41.463Z",
+      "commandId": "exec-86636939-fbf9-487d-a2ab-c8c04872ebae",
+      "observedCompiles": 3,
+      "exitCode": 1,
+      "command": "npm run release:all"
+    },
+    {
+      "timestamp": "2026-11-06T13:49:21.946Z",
+      "commandId": "exec-ce2dbf55-41eb-43b1-9b72-dfdee09ecb65",
+      "observedCompiles": 1,
+      "exitCode": 1,
+      "command": "npm run check"
+    },
+    {
+      "timestamp": "2026-11-06T14:20:43.278Z",
+      "commandId": "exec-e4c500bc-ff87-42e8-8ad9-258b1cf0e348",
+      "observedCompiles": 3,
+      "exitCode": 1,
+      "command": "npm run release:all"
+    }
+  ],
+  "schemaVersion": 1,
+  "countingRule": "One successful recorded production-build command per invocation; a coordinated multi-platform run counts once. Completion output and exit code 0 are required. Log reads, failed/cancelled commands, CI duplicates, native-only compiles and unrecorded manual runs are excluded. This is a recoverable lower bound, not proof that no other builds occurred.",
+  "historicalSuccessfulBuilds": 32,
+  "nextReservedBuild": 33,
+  "auditedThrough": "2026-11-06T16:44:36.814Z"
+}

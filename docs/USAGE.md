@@ -1,10 +1,10 @@
 # THUGSred Glasses
 
-A desktop workspace for web security research and development. Electron + React + TypeScript UI, independently testable Node.js proxy core, local extension system. Version **0.1.0**. Official home: [glasses.thugs.red](https://glasses.thugs.red). The website is maintained separately; [Community browsing and signed installation](COMMUNITY.md) use its public API.
+A desktop workspace for web security research and development. Electron + React + TypeScript UI, independently testable Node.js proxy core, local extension system. Official home: [glasses.thugs.red](https://glasses.thugs.red). The website is maintained separately; [Community browsing and signed installation](COMMUNITY.md) use its public API.
 
 ## Illustrated guides
 
-- [User and developer manual - 22 pages](../output/pdf/Glasses-0.1-User-Manual.pdf)
+- [User and developer manual - 22 pages](../output/pdf/Glasses-User-Manual.pdf)
 - [Product overview - 4 pages](../output/pdf/Glasses-Product-Overview.pdf)
 
 Both use actual application screenshots and the Affinity artwork. The manual covers operation, corporate networking, privacy, CA trust, extensions, security, packaging and troubleshooting. The overview is intended for sharing. `scripts/manuals.py` rebuilds them with ReportLab after the desktop smoke has generated screenshots.
@@ -85,7 +85,7 @@ Toggling off switches open research browser sessions back to system routing and 
 
 **Privacy bypass list** accepts one literal hostname, `*.subdomain.example`, IP, or IPv4/IPv6 CIDR per line (up to 500). Blank/comment lines are ignored. A wildcard matches subdomains only. CIDRs also check locally resolved addresses; unresolved CIDR checks withhold the connection. DNS is local for this check even when the relay would normally resolve the destination remotely. Lists cannot infer remote split-DNS addresses: include literal confidential hostnames for those environments. The bypass policy suppresses interception, rewrite rules, plugin visibility and capture; HTTPS CONNECT becomes an opaque tunnel. Traffic still follows the configured corporate chain. Repeater and TLS Inspector refuse excluded destinations. Changes close active tunnels and cancel pending work. Earlier captures/exports are not erased automatically.
 
-Under **Settings → Certificates**, stop the proxy and import a PEM signing CA (optionally followed by its issuer chain) and matching private key. RSA keys of at least 2048 bits are supported in 0.1; ECDSA signing CAs and hardware-backed keys are deferred. Encrypted PEM keys can be unlocked with a passphrase that is not retained. Glasses validates CA/signing usage, dates, key match and supplied issuer signatures; generated leaf validity is capped by the signing CA. Imported private keys are stored with private file permissions, not encrypted at rest. Public certificate export excludes keys. The original local CA remains available through **Use local CA**.
+Under **Settings → Certificates**, stop the proxy and import a PEM signing CA (optionally followed by its issuer chain) and matching private key. RSA keys of at least 2048 bits are supported in this release; ECDSA signing CAs and hardware-backed keys are deferred. Encrypted PEM keys can be unlocked with a passphrase that is not retained. Glasses validates CA/signing usage, dates, key match and supplied issuer signatures; generated leaf validity is capped by the signing CA. Imported private keys are stored with private file permissions, not encrypted at rest. Public certificate export excludes keys. The original local CA remains available through **Use local CA**.
 
 ## Build packages
 
@@ -125,7 +125,7 @@ npm run icons
 | `docs/design/`                | Approved visual concepts and generated-image prompts                                      |
 | `docs/IMPLEMENTATION_PLAN.md` | Scope and architecture decisions                                                          |
 
-## Boundaries for 0.1
+## Current boundaries
 
 HTTP/2, HTTP/3/QUIC, gRPC semantics and SOCKS UDP are not implemented. WebSocket upgrades are tunneled and recorded, but individual frames are not displayed or edited. A separate HTTPS probe reports a single negotiated TLS connection; it is not a comprehensive cipher vulnerability scanner.
 
@@ -142,3 +142,8 @@ Open **Settings → Appearance → Workspace density & text**. Standard uses 28p
 Custom controls cover traffic row height (24–44px), sidebar item height (26–44px), request/response font size (10–16px), text line height (14–30px, at least 2px above font size), and header row padding (0–12px per side). Header/body/raw/hex panes and Repeater/interception editors share the typography. Ligatures are disabled to preserve individual character shapes.
 
 Choose System monospace, bundled JetBrains Mono, or a locally installed JetBrainsMono Nerd Font Mono. The Nerd option falls back to bundled JetBrains Mono when unavailable. Fonts load locally; no arbitrary CSS or remote font URLs are accepted. The Megrim Glasses wordmark is separate from these data fonts.
+
+<!-- versions:start -->
+
+Application **0.8.1 (33)** · Documentation **1.0.0 (1)** (covers Glasses 0.8.1 (33)). [Version policy](VERSIONING.md).
+<!-- versions:end -->

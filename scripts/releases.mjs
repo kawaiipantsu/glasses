@@ -3,10 +3,15 @@ import path from 'node:path';
 import os from 'node:os';
 import crypto from 'node:crypto';
 import { spawn, execFileSync } from 'node:child_process';
+import versioning from './versioning.cjs';
 const root = path.resolve(import.meta.dirname, '..');
 const requested = process.argv[2] || 'all';
 if (!['all', 'mac', 'win', 'linux'].includes(requested))
   throw new Error('Use all, mac, win or linux');
+if (!process.argv.includes('--current')) versioning.advance(root, 'application', 'build');
+const versions = versioning.sync(root, true);
+const buildInfo = versioning.stamp(root);
+const artifactPrefix = `Glasses-${versions.application.version}-build.${versions.application.build}-`;
 const configFile = path.join(root, '.glasses-build.json');
 const config = fs.existsSync(configFile) ? JSON.parse(fs.readFileSync(configFile, 'utf8')) : {};
 const output = path.join(root, 'release');
@@ -59,6 +64,7 @@ function snapshot(file) {
     'LICENSES',
     'package.json',
     'package-lock.json',
+    'version.json',
     'tsconfig.json',
     'vite.config.ts',
     'index.html',
@@ -71,7 +77,7 @@ function snapshot(file) {
 }
 async function build(platform) {
   if (platform === 'mac')
-    return run('npm', ['run', 'dist:mac'], {
+    return run('npm', ['run', 'dist:mac', '--', '--current'], {
       env: { ...process.env, CSC_IDENTITY_AUTO_DISCOVERY: 'false' },
       log: path.join(logDir, 'mac.log'),
     });
@@ -84,7 +90,7 @@ async function build(platform) {
     platform === 'win'
       ? 'npx electron-builder --win nsis --x64 --publish never && npx electron-builder --win nsis --arm64 --publish never'
       : `npx electron-builder ${targets} --x64 --arm64 --publish never`;
-  const command = `npm ci && npm run build && ${packaging}`;
+  const command = `npm ci && npm run build -- --current && ${packaging}`;
   const workRoot = path.join(root, '.build-work');
   fs.mkdirSync(workRoot, { recursive: true });
   const temp = fs.mkdtempSync(path.join(workRoot, 'glasses-build-')),
@@ -175,8 +181,25 @@ for (const platform of requested === 'all' ? ['mac', 'linux', 'win'] : [requeste
   await build(platform);
 const artifacts = fs
   .readdirSync(output)
-  .filter((n) => /\.(dmg|zip|exe|deb|tar\.gz)$/.test(n))
+  .filter((n) => n.startsWith(artifactPrefix) && /\.(dmg|zip|exe|deb|tar\.gz)$/.test(n))
   .sort();
+const manifest = {
+  schemaVersion: 1,
+  application: buildInfo,
+  documentation: versions.documentation,
+  artifacts: artifacts.map((name) => ({
+    filename: name,
+    bytes: fs.statSync(path.join(output, name)).size,
+    sha256: crypto
+      .createHash('sha256')
+      .update(fs.readFileSync(path.join(output, name)))
+      .digest('hex'),
+  })),
+};
+fs.writeFileSync(
+  path.join(output, artifactPrefix + 'manifest.json'),
+  JSON.stringify(manifest, null, 2) + '\n',
+);
 fs.writeFileSync(
   path.join(output, 'SHA256SUMS'),
   artifacts
@@ -189,4 +212,5 @@ fs.writeFileSync(
     )
     .join('\n') + '\n',
 );
+fs.copyFileSync(path.join(output, 'SHA256SUMS'), path.join(output, artifactPrefix + 'SHA256SUMS'));
 console.log('Release artifacts and SHA256SUMS are in ' + output);

@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version 0.1.0" src="https://img.shields.io/badge/version-0.1.0-e9374c?style=flat-square" />
+  <img alt="Version 0.8.1 (33)" src="https://img.shields.io/badge/version-0.8.1_(33)-e9374c?style=flat-square" />
   <img alt="macOS, Windows, Linux" src="https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-242a35?style=flat-square" />
   <img alt="x64 and ARM64" src="https://img.shields.io/badge/architecture-x64%20%7C%20ARM64-242a35?style=flat-square" />
   <a href="LICENSE"><img alt="CC BY-NC 4.0 plus workplace permission" src="https://img.shields.io/badge/license-CC%20BY--NC%20%2B%20workplace%20permission-e9374c?style=flat-square" /></a>
@@ -26,7 +26,12 @@
 
 Built by the Danish hacking community **[THUGSred](https://thugs.red)**, Glasses brings an intercepting proxy, request experiments, network diagnostics, and extensible tools into one focused desktop. Inspired by the workflows of Burp Suite, Fiddler, and Proxyman, with its own red shades and a community-first direction.
 
-**0.1 is a usable development release.** Apple Silicon is the primary tested desktop. Cross-platform packages target x64 and ARM64; Windows/Linux runtime acceptance is still in progress. See the [verification record](docs/RELEASE_NOTES.md) for what has actually been tested. Initial packages are unsigned and macOS packages are not notarized.
+<!-- versions:start -->
+
+Application **0.8.1 (33)** · Documentation **1.0.0 (1)** (covers Glasses 0.8.1 (33)). [Version policy](docs/VERSIONING.md).
+<!-- versions:end -->
+
+**Glasses is a usable development release.** Apple Silicon is the primary tested desktop. Cross-platform packages target x64 and ARM64; Windows/Linux runtime acceptance is still in progress. See the [verification record](docs/RELEASE_NOTES.md) for what has actually been tested. Initial packages are unsigned and macOS packages are not notarized.
 
 ## Look inside
 
@@ -130,7 +135,7 @@ The real application UI above uses a signed local test fixture. It demonstrates 
 
 | Guide                                                              | What is inside                                                                   |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| [Illustrated user manual](output/pdf/Glasses-0.1-User-Manual.pdf)  | 22 pages of screenshots, workflows, routing, trust, privacy, and troubleshooting |
+| [Illustrated user manual](output/pdf/Glasses-User-Manual.pdf)      | 22 pages of screenshots, workflows, routing, trust, privacy, and troubleshooting |
 | [Product overview](output/pdf/Glasses-Product-Overview.pdf)        | Four-page introduction to share with your team                                   |
 | [Developer manual](output/pdf/Glasses-Developer-Manual-API-v1.pdf) | Extension API, worked examples, UI/UX, permissions, and compatibility            |
 | [Security architecture](SECURITY.md)                               | Trust boundaries, controls, verification, and known limits                       |
@@ -139,7 +144,7 @@ The real application UI above uses a signed local test fixture. It demonstrates 
 
 Captured HTML and JavaScript stay inert in the inspector. The application renderer has no Node access; Electron sandboxing, context isolation, CSP, and validated IPC separate untrusted traffic from application privileges. Extensions use capability-limited bridges. Capture budgets, timeouts, and bounded iteration jobs keep experiments manageable.
 
-Security is ongoing engineering work. See [SECURITY.md](SECURITY.md) for specifics and private reporting guidance. Version 0.1 is not independently audited or presented as an enterprise-hardened product.
+Security is ongoing engineering work. See [SECURITY.md](SECURITY.md) for specifics and private reporting guidance. This release is not independently audited or presented as an enterprise-hardened product.
 
 Current boundaries: HTTP/1.1 inspection; SOCKS5 TCP tunnels with metadata; WebSocket upgrade passthrough without frame editing. HTTP/2/3, UDP, NTLM/Kerberos, and PAC execution are not implemented. Header checks are advisory and Timeline measures proxy observations, not browser rendering.
 

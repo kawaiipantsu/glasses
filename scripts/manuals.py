@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 from xml.sax.saxutils import escape
 from reportlab.pdfgen import canvas
 from reportlab.lib.colors import HexColor, Color, white
@@ -14,6 +15,10 @@ from reportlab.graphics import renderPDF
 
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'output/pdf'; SHOTS=ROOT/'test-results'
+VERSIONS=json.loads((ROOT/'version.json').read_text())
+APP=VERSIONS['documentation']
+APP_LABEL=f"{APP['applicationVersion']} ({APP['applicationBuild']})"
+DOC_LABEL=f"{APP['version']} ({APP['build']})"
 W,H=595.276,841.89; M=44; CW=W-2*M
 RED=HexColor('#e9374c'); INK=HexColor('#171b23'); MUTED=HexColor('#596474'); LIGHT=HexColor('#edf0f4'); DARK=HexColor('#11151d')
 for name,file in [('Body','Arial.ttf'),('Bold','Arial Bold.ttf'),('Italic','Arial Italic.ttf'),('Display','Arial Black.ttf')]:
@@ -53,13 +58,13 @@ def header(c,number,section,title,intro):
     c.setFillColor(white);c.rect(0,0,W,H,fill=1,stroke=0)
     c.setFillColor(RED);c.rect(0,H-8,W,8,fill=1,stroke=0)
     brand(c,M,H-38,10)
-    c.setFillColor(MUTED);c.setFont('Body',9);c.drawRightString(W-M,H-38,'GLASSES 0.1  /  FIELD MANUAL')
+    c.setFillColor(MUTED);c.setFont('Body',9);c.drawRightString(W-M,H-38,f'GLASSES {APP_LABEL}  /  FIELD MANUAL')
     c.bookmarkPage(f'p{number}');c.addOutlineEntry(title,f'p{number}',level=0,closed=False)
     c.setFillColor(RED);c.setFont('Bold',9);c.drawString(M,H-79,section.upper())
     c.setFillColor(INK);c.setFont('Bold',27);c.drawString(M,H-114,title)
     y=para(c,intro,M,H-133,CW,'intro')
     c.setStrokeColor(LIGHT);c.line(M,49,W-M,49)
-    c.setFillColor(MUTED);c.setFont('Body',8);c.drawString(M,32,'glasses.thugs.red  •  Local development release  •  6 November 2026')
+    c.setFillColor(MUTED);c.setFont('Body',8);c.drawString(M,32,f'DOCUMENTATION {DOC_LABEL}  /  GLASSES {APP_LABEL}')
     c.drawRightString(W-M,32,f'{number:02}')
     c.linkURL('https://glasses.thugs.red',(M,27,M+83,42),relative=0,thickness=0)
     return y-18
@@ -94,14 +99,14 @@ def cover(c,promotional=False):
     para(c,text,M,H-373,CW,'white')
     image(c,'glasses-traffic-dark.png',M,385,CW)
     c.setFillColor(HexColor('#aeb9ca'));c.setFont('Body',9)
-    c.drawString(M,48,'PRODUCT OVERVIEW  /  0.1' if promotional else 'USER & DEVELOPER GUIDE  /  VERSION 0.1.0')
+    c.drawString(M,48,f'DOCS {DOC_LABEL}  /  APP {APP_LABEL}')
     c.setFillColor(white);c.setFont('Bold',11);c.drawRightString(W-M,47,'glasses.thugs.red')
     c.linkURL('https://glasses.thugs.red',(W-M-125,39,W-M,61),relative=0,thickness=0)
     c.setFont('Body',8);c.setFillColor(HexColor('#93a0b3'));c.drawString(M,30,'Real application screenshot using the built-in local lab. macOS development release.')
     c.bookmarkPage('p1');c.addOutlineEntry('Glasses - Look closer','p1',level=0);c.showPage()
 
-manual=canvas.Canvas(str(OUT/'Glasses-0.1-User-Manual.pdf'),pagesize=(W,H),pageCompression=1)
-manual.setTitle('Glasses 0.1 - Illustrated User and Developer Manual');manual.setAuthor('THUGSred');manual.setSubject('Operation, corporate routing, security, plugins and release reference')
+manual=canvas.Canvas(str(OUT/'Glasses-User-Manual.pdf'),pagesize=(W,H),pageCompression=1)
+manual.setTitle(f'Glasses {APP_LABEL} - User Manual - Documentation {DOC_LABEL}');manual.setAuthor('THUGSred');manual.setSubject('Operation, corporate routing, security, plugins and release reference')
 cover(manual)
 y=header(manual,2,'Start here','Your guide to Glasses','A practical reference for researchers, web developers and extension authors. The screenshots use local lab traffic and example settings, never private browsing data.')
 contents=[(3,'First run and local lab'),(4,'The research workspace'),(5,'Reading captured traffic'),(6,'Context menus and transforms'),(7,'Intercept, edit and forward'),(8,'Repeater and request editing'),(9,'Iterations and fuzz payloads'),(10,'Site Timeline / Speed Inspector'),(11,'SSL / TLS Inspector'),(12,'Header Hardening and rules'),(13,'System proxy toggle'),(14,'Proxy and SOCKS relay chains'),(15,'Privacy bypass lists'),(16,'Organization CA and trust'),(17,'Themes, storage and exchange'),(18,'Installing community extensions'),(19,'Building an extension'),(20,'Security architecture'),(21,'Build and release reference'),(22,'Troubleshooting and glossary')]
@@ -111,7 +116,7 @@ for idx,(page,title) in enumerate(contents):
     manual.setFillColor(INK);manual.setFont('Body',9.5);manual.drawString(x+25,yy,title)
     manual.linkRect('',f'p{page}',(x,yy-4,x+CW/2-10,yy+12),relative=0,thickness=0)
 y-=325
-blocks(manual,[('What this release is','Glasses 0.1 is a usable local development release. macOS ARM64 is the primary tested desktop. Packages target Intel macOS and x64/ARM64 Windows/Linux; those desktops still need platform acceptance. Signed distribution, notarization and enterprise deployment controls remain release work.'),('Official home','<link href="https://glasses.thugs.red" color="#e9374c">glasses.thugs.red</link> is the official application and community address. The app supports opt-in catalog browsing, signed package review and explicit installation. The service is deployed separately; local JSON installation works offline. Automatic updates are not implemented.'),('How to read the screenshots','Ports, fingerprints and request durations are examples. Your installation creates its own CA and local lab port. Dark and light modes show the same tools. The guidance describes implemented behavior; the release reference marks important limitations.')],M,y,CW)
+blocks(manual,[('What this release is',f'Glasses {APP_LABEL} is a usable local development release. macOS ARM64 is the primary tested desktop. Packages target Intel macOS and x64/ARM64 Windows/Linux; those desktops still need platform acceptance. Signed distribution, notarization and enterprise deployment controls remain release work.'),('Official home','<link href="https://glasses.thugs.red" color="#e9374c">glasses.thugs.red</link> is the official application and community address. The app supports opt-in catalog browsing, signed package review and explicit installation. The service is deployed separately; local JSON installation works offline. Automatic updates are not implemented.'),('How to read the screenshots','Ports, fingerprints and request durations are examples. Your installation creates its own CA and local lab port. Dark and light modes show the same tools. The guidance describes implemented behavior; the release reference marks important limitations.')],M,y,CW)
 manual.showPage()
 standard(manual,3,'Getting started','First run and local lab','Start with real local traffic before connecting your own browser or corporate network.',[
 ('1  Open the application','On Apple Silicon, use the arm64 macOS package; on Intel, use x64. Open the DMG and copy Glasses to Applications, or extract the ZIP. These local builds are not Developer ID signed or notarized. Use your organization’s normal approval process for development software.'),
@@ -153,7 +158,7 @@ standard(manual,9,'Repeater','Iterations and fuzz payloads','Turn a single draft
 ('Example','URL:<br/><font name="Courier">https://app.example/search?q={{payload}}</font><br/><br/>Payloads: <font name="Courier">alpha</font>, <font name="Courier">beta</font>, <font name="Courier">gamma</font>.<br/>Set 3 iterations and concurrency 1 for one request per value. URL-encode payloads explicitly when needed.')],[
 ('Read the result table','Each result reports iteration, payload, status, captured record, duration or an error. Open a result to inspect its request and response. A failed request does not mean the whole run stopped; review the per-result error.'),
 ('Cancel predictably','Cancel stops active requests and wakes waiting workers. Stopping the proxy or changing routing cancels active runs too. A server may already have received an earlier request; cancellation cannot undo server-side changes.'),
-('What fuzz means in 0.1','This is payload substitution and repeatable request execution. It is not an automatic vulnerability scanner, a combinatorial attack engine or a malformed-wire request-smuggling tool. Keep your interpretation tied to the actual response evidence.')])
+('What fuzz means in this release','This is payload substitution and repeatable request execution. It is not an automatic vulnerability scanner, a combinatorial attack engine or a malformed-wire request-smuggling tool. Keep your interpretation tied to the actual response evidence.')])
 standard(manual,10,'Performance','Site Timeline / Speed Inspector','See where observed network time is spent, compare slow requests, and follow an outlier back to its evidence.',[
 ('Start with captured traffic','Timeline uses the current session. Capture a page or API workflow, then open Timeline. Compare request starts, total duration and transfer sizes; sort or inspect interesting rows and send them to Repeater.'),
 ('Read measured phases','Connection, TLS, first-byte wait and download are based on proxy observations. A configured relay can add negotiation time. Missing phases are unavailable rather than invented; local lab transfers often have little measurable connection delay.')],[
@@ -175,7 +180,7 @@ standard(manual,13,'Network routing','The system proxy toggle','Switch between G
 ('Turn it off','Click again to restore the saved proxy dictionaries and protocol-enabled state, including prior PAC, bypass and authentication settings. The listeners remain running for clients configured manually. Stop/quit also restores managed system settings.')],[
 ('Research browser behavior','Switching off returns open research sessions to system routing and closes pooled connections. Reload to create a fresh connection. On a fresh launch, Open browser explicitly uses Glasses even when global routing has never been enabled.'),
 ('Recovery and conflicts','A recovery journal is saved before changing settings. After an unclean exit, restoration is attempted next launch. If another application changed a service, Glasses preserves its changes and releases settings still owned by Glasses. A recovery report is saved. If the OS refuses restoration, Quit anyway closes the app and keeps the journal for next launch.'),
-('Scope of the switch','This is a system-proxy convenience, not a VPN. Explicitly configured apps can ignore it; new services/locations need another toggle cycle. Windows/Linux use manual proxy setup in 0.1. Tests cover restore/rollback, conflicts and shutdown failures. A real leftover macOS proxy configuration was restored successfully; fresh takeover still needs interactive acceptance.')])
+('Scope of the switch','This is a system-proxy convenience, not a VPN. Explicitly configured apps can ignore it; new services/locations need another toggle cycle. Windows/Linux use manual proxy setup in this release. Tests cover restore/rollback, conflicts and shutdown failures. A real leftover macOS proxy configuration was restored successfully; fresh takeover still needs interactive acceptance.')])
 standard(manual,14,'Corporate networks','Proxy / SOCKS relay chains','Put Glasses in front of a mandatory corporate proxy, or build a deliberate sequence of upstream hops.',[
 ('Configure in order','In Proxy & interception, add a hop, select HTTP, HTTPS or SOCKS5, and enter host/port. Add credentials if needed. Use the arrows to reorder up to eight hops. Enable relaying and save. The diagram follows connection order.'),
 ('Test the saved route','Use an HTTPS test destination. The test opens the connection and validates TLS without fetching a page. HTTP destinations use absolute-form forwarding at the last HTTP(S) proxy. Intermediate links and HTTPS targets use CONNECT.')],[
@@ -218,8 +223,8 @@ standard(manual,20,'Security model','Treat hostile content as data','Glasses int
 standard(manual,21,'Developer reference','Build and release reference','The repository contains the application, proxy core, extension SDK, tests and native packaging configuration.',[
 ('Run from source','Use Node.js 24 LTS and npm. Run <font name="Courier">npm ci</font>, then <font name="Courier">npm run dev</font>. On macOS the native helper build needs Xcode command-line tools. For production UI: run native, build, then start.'),
 ('Validate','<font name="Courier">npm run check</font>: build and core tests.<br/><font name="Courier">npm run test:ui</font>: Electron workflow and screenshots.<br/><font name="Courier">npm run security:check</font>: build/tests plus dependency audit.<br/><font name="Courier">npm run test:packaged</font>: local hardened ARM64 package smoke.'),
-('Package','Use release:all from the Mac checkout. macOS builds locally; Windows uses a local Docker/Wine worker; Linux uses a disposable Docker/SSH worker. Packages and SHA256SUMS return to release/. See docs/BUILDING.md for worker setup.')],[
-('Verified versus configured','48 core/security/network tests pass. Desktop, community, recovery and hardened ARM64 package smokes pass. The native helper restored real leftover macOS settings. Linux and Windows packages were built for x64 and ARM64. Windows/Linux GUI acceptance is separate.'),
+('Package','Versions use major.minor.patch (build). About can copy the app identity. PDF footers identify the documentation edition and covered app. Use release:all from the Mac checkout. macOS builds locally; Windows uses a local Docker/Wine worker; Linux uses a disposable Docker/SSH worker. Packages and SHA256SUMS return to release/. See docs/BUILDING.md for worker setup.')],[
+('Verified versus configured','51 core/security/network/version tests pass. Desktop, community, recovery and hardened ARM64 package smokes pass. The native helper restored real leftover macOS settings. Linux and Windows packages were built for x64 and ARM64. Windows/Linux GUI acceptance is separate.'),
 ('Protocol boundaries','HTTP/1.1 inspection; HTTPS MITM; SOCKS5 TCP metadata; WebSocket upgrade passthrough. No HTTP/2 or HTTP/3 inspection, gRPC semantics, SOCKS UDP or WebSocket frame editing. The TLS tool observes one negotiated connection.'),
 ('Shipping work','Packages are development builds without distribution signing or notarization. Intel macOS was not run on Intel hardware. The repository uses CC BY-NC 4.0 with additional workplace/consulting permission; read LICENSE before redistribution.')])
 standard(manual,22,'Keep moving','Troubleshooting and glossary','Start with the route, then trust, then the specific request. Keep the version and a minimal reproduction with any report.',[
@@ -234,14 +239,14 @@ manual.save()
 
 # A concise four-page, shareable introduction; no invented download or account CTA.
 b=canvas.Canvas(str(OUT/'Glasses-Product-Overview.pdf'),pagesize=(W,H),pageCompression=1)
-b.setTitle('Glasses - Look closer. Product overview');b.setAuthor('THUGSred');b.setSubject('Four-page introduction to the Glasses research workspace')
+b.setTitle(f'Glasses {APP_LABEL} - Product Overview - Documentation {DOC_LABEL}');b.setAuthor('THUGSred');b.setSubject('Four-page introduction to the Glasses research workspace')
 cover(b,True)
 def promo_header(c,page,kicker,title,subtitle):
     c.setFillColor(white);c.rect(0,0,W,H,fill=1,stroke=0);brand(c,M,H-40,11)
     c.setFillColor(RED);c.setFont('Bold',9);c.drawString(M,H-86,kicker)
     c.setFillColor(INK);c.setFont('Bold',30);c.drawString(M,H-125,title)
     y=para(c,subtitle,M,H-148,CW,'intro')
-    c.setStrokeColor(LIGHT);c.line(M,49,W-M,49);c.setFillColor(MUTED);c.setFont('Body',8);c.drawString(M,31,'GLASSES 0.1  /  PRODUCT OVERVIEW');c.drawRightString(W-M,31,f'{page:02}');return y-20
+    c.setStrokeColor(LIGHT);c.line(M,49,W-M,49);c.setFillColor(MUTED);c.setFont('Body',8);c.drawString(M,31,f'GLASSES {APP_LABEL}  /  DOCS {DOC_LABEL}');c.drawRightString(W-M,31,f'{page:02}');return y-20
 
 y=promo_header(b,2,'FROM OBSERVATION TO EXPERIMENT','Follow the request.','See what moved across the wire, ask a better question, and test it from the same workspace.')
 y=image(b,'glasses-repeater.png',M,y,CW)-23
@@ -266,7 +271,7 @@ y=promo_header(b,4,'A COMMUNITY TOOL, TAKING SHAPE','Look closer. Build further.
 b.drawImage(str(ROOT/'docs/brand/glasses-preview.png'),M+45,y-149,width=CW-90,height=(CW-90)*440/1200,mask='auto')
 y-=185
 blocks(b,[('Available in the first build','HTTP/1.1 and HTTPS inspection, SOCKS5 TCP tunnels, interception, Repeater iterations, timeline, TLS/header inspection, local extensions, custom CA, bypass policies and upstream proxy chains.'),('macOS first, portable by design','The first desktop is built and exercised on Apple Silicon. Packages target Intel macOS and x64/ARM64 Windows/Linux, with all builds initiated from the Mac checkout. Native platform acceptance and distribution hardening continue.')],M,y,col)
-blocks(b,[('A community you can extend','The app supports catalog browsing, signed package verification and explicit permission review. Browser install links open a review request. The service at glasses.thugs.red is deployed separately; local JSON installation works today. No silent updates.'),('Release status','Version 0.1 is a local development release, not an audited enterprise deployment. Packages are not Developer ID signed/notarized. HTTP/2/3, WebSocket frame editing and enterprise proxy SSO are not yet supported.')],M+col+24,y,col)
+blocks(b,[('A community you can extend','The app supports catalog browsing, signed package verification and explicit permission review. Browser install links open a review request. The service at glasses.thugs.red is deployed separately; local JSON installation works today. No silent updates.'),('Release status',f'Glasses {APP_LABEL} is a local development release, not an audited enterprise deployment. Packages are not Developer ID signed/notarized. HTTP/2/3, WebSocket frame editing and enterprise proxy SSO are not yet supported.')],M+col+24,y,col)
 b.setFillColor(DARK);b.roundRect(M,88,CW,94,12,fill=1,stroke=0)
 b.setFont('Bold',20);b.setFillColor(white);b.drawString(M+20,143,'glasses.thugs.red')
 para(b,'The official home for Glasses.<br/>Keep this introduction with the illustrated user manual.',M+20,128,CW-120,'white')

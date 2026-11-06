@@ -178,6 +178,16 @@ export interface Bootstrap {
   dark: boolean;
   platform: string;
   version: string;
+  build: number;
+  displayVersion: string;
+  architecture: string;
+  buildInfo: { sourceRevision?: string; sourceSha256?: string; builtAt?: string };
+  documentation: {
+    version: string;
+    build: number;
+    applicationVersion: string;
+    applicationBuild: number;
+  };
   dataPath: string;
   warning?: string;
   installIntent?: CommunityIntent;

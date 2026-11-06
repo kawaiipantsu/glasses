@@ -1,7 +1,7 @@
 {
   "name": "thugsred-glasses",
   "productName": "Glasses",
-  "version": "0.1.0",
+  "version": "0.8.1",
   "description": "THUGSred web security research and debugging proxy",
   "author": "THUGSred <hello@thugs.red>",
   "homepage": "https://glasses.thugs.red",
@@ -10,16 +10,16 @@
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "npm run native && node scripts/dev.mjs",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/build.mjs",
     "start": "electron .",
     "test": "node --test tests/*.test.cjs",
     "test:ui": "node scripts/smoke.mjs",
-    "check": "npm run build && npm test",
-    "dist:mac": "npm run native && npm run build && electron-builder --mac dmg zip --arm64 --x64",
-    "dist:mac:local": "npm run native && npm run build && electron-builder --mac dmg --arm64",
-    "dist:linux": "npm run build && electron-builder --linux tar.gz deb --arm64 --x64",
-    "dist:win": "npm run build && electron-builder --win nsis --x64 && electron-builder --win nsis --arm64",
-    "pack": "npm run build && electron-builder --dir",
+    "check": "npm run build -- --current && npm test",
+    "dist:mac": "node scripts/package.mjs mac",
+    "dist:mac:local": "node scripts/package.mjs mac-local",
+    "dist:linux": "node scripts/package.mjs linux",
+    "dist:win": "node scripts/package.mjs win",
+    "pack": "node scripts/package.mjs dir",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "security:check": "npm run check && npm audit --audit-level=high",
@@ -30,7 +30,12 @@
     "release:all": "node scripts/releases.mjs all",
     "release:windows": "node scripts/releases.mjs win",
     "release:linux": "node scripts/releases.mjs linux",
-    "test:community": "node scripts/community-smoke.mjs"
+    "test:community": "node scripts/community-smoke.mjs",
+    "version:show": "node scripts/version.mjs show",
+    "version:sync": "node scripts/version.mjs sync",
+    "version:next": "node scripts/version.mjs next",
+    "version:check": "node scripts/version.mjs check",
+    "docs:build": "node scripts/documents.mjs"
   },
   "dependencies": {
     "node-forge": "^1.4.3",
@@ -63,7 +68,7 @@
   "build": {
     "appId": "red.thugs.glasses",
     "productName": "Glasses",
-    "artifactName": "Glasses-${version}-${os}-${arch}.${ext}",
+    "artifactName": "Glasses-${version}-build.${buildNumber}-${os}-${arch}.${ext}",
     "directories": {
       "output": "release",
       "buildResources": "build"
@@ -76,7 +81,9 @@
       "build/icon.png",
       "package.json",
       "LICENSE",
-      "LICENSES/**/*"
+      "LICENSES/**/*",
+      "version.json",
+      "build/build-info.json"
     ],
     "asar": true,
     "electronFuses": {
@@ -101,7 +108,8 @@
           "from": "build/native/proxy-helper",
           "to": "proxy-helper"
         }
-      ]
+      ],
+      "bundleVersion": "33"
     },
     "linux": {
       "category": "Development",
@@ -131,7 +139,8 @@
           "glasses"
         ]
       }
-    ]
+    ],
+    "buildNumber": "33"
   },
   "engines": {
     "node": ">=22.12.0"

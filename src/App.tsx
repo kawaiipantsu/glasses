@@ -733,7 +733,9 @@ export default function App() {
           <Puzzle size={13} />
           {plugins.filter((p) => p.enabled).length} plugins
         </span>
-        <span>v{data.version}</span>
+        <span title={`Application ${data.displayVersion} · ${data.platform} ${data.architecture}`}>
+          v{data.displayVersion}
+        </span>
       </footer>
       {toast && (
         <div className="toast" role="status">
