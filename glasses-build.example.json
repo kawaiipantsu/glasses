@@ -1,0 +1,13 @@
+{
+  "win": {
+    "kind": "docker",
+    "context": "colima-glasses-build",
+    "image": "electronuserland/builder:wine"
+  },
+  "linux": {
+    "kind": "ssh",
+    "host": "builder@build-server.example",
+    "identity": "~/.ssh/glasses-builder",
+    "image": "electronuserland/builder:latest"
+  }
+}

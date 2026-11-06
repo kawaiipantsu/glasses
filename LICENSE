@@ -1,0 +1,60 @@
+Glasses licensing notice
+Copyright (c) 2026 THUGSred and contributors
+
+1. Base license
+
+Except where a file or component states otherwise, the original Glasses source
+code, documentation, and artwork in this repository are licensed under Creative
+Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).
+
+The complete, unchanged CC license text is in LICENSES/CC-BY-NC-4.0.txt:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode.en
+
+That license permits non-commercial sharing and adaptation subject to its terms,
+including attribution and indication of changes. The additional permission below
+expands those rights; it does not amend or restrict the CC license.
+
+2. Additional workplace and consulting permission
+
+For material covered by this notice, each licensor additionally grants you a
+worldwide, royalty-free, non-exclusive permission, for the duration of their
+applicable copyright, to reproduce, run, and privately modify Glasses:
+
+(a) within your organization for its internal business purposes, including
+    research, software development, testing, and security operations; and
+(b) as a tool you operate while providing paid research, development, security,
+    or consulting services to clients.
+
+You may make and share copies and private modifications with your employees and
+contractors solely for those permitted activities. Contractors may use those
+copies only on your behalf. You may charge for your professional work and deliver
+its findings, reports, and other results, provided those deliverables do not
+redistribute Glasses or its code. This notice does not claim ownership of traffic,
+research findings, or other independent user-created material.
+
+This additional permission does not authorize selling, licensing for a fee,
+commercially distributing, or bundling Glasses or a derivative as a product. It
+does not authorize providing third parties with paid hosted or remote access to
+Glasses itself. Commercial redistribution of original or modified Glasses code
+or binaries requires separate permission from the relevant rights holders.
+Non-commercial redistribution remains available under the base license.
+
+For copies made or shared under this additional permission, retain this notice,
+the CC license text, existing attribution and copyright notices, and clearly
+identify modifications. The CC license's disclaimer of warranties, limitation
+of liability, termination/reinstatement, and interpretation provisions apply to
+this additional permission as well. This permission adds no warranty, support
+commitment, patent license, or trademark license and is irrevocable while its
+conditions are satisfied.
+
+3. Third-party material and identity
+
+Third-party dependencies and separately identified components retain their own
+licenses. This notice does not replace those licenses. Trademark rights are not
+licensed; attribution must not imply that a fork is an official THUGSred release
+or that THUGSred endorses it.
+
+Project and permission inquiries: https://glasses.thugs.red
+
+This project-specific additional permission is not a Creative Commons license
+or an endorsement by Creative Commons. The standard CC text remains unchanged.

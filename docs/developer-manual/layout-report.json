@@ -1,0 +1,292 @@
+[
+  {
+    "page": 2,
+    "title": "About this edition",
+    "content_bottom": 148.6
+  },
+  {
+    "page": 3,
+    "title": "Contents / build and integrate",
+    "content_bottom": 159.8
+  },
+  {
+    "page": 4,
+    "title": "Contents / design and ship",
+    "content_bottom": 178.6
+  },
+  {
+    "page": 5,
+    "title": "Runtime and trust boundaries",
+    "content_bottom": 196.7
+  },
+  {
+    "page": 6,
+    "title": "Choose the smallest integration",
+    "content_bottom": 153.7
+  },
+  {
+    "page": 7,
+    "title": "Set up a local workspace",
+    "content_bottom": 134.4
+  },
+  {
+    "page": 8,
+    "title": "Your first complete package",
+    "content_bottom": 189.7
+  },
+  {
+    "page": 9,
+    "title": "Installation and tool lifecycle",
+    "content_bottom": 220.3
+  },
+  {
+    "page": 10,
+    "title": "Identity and strict validation",
+    "content_bottom": 108.8
+  },
+  {
+    "page": 11,
+    "title": "Collections and UI document",
+    "content_bottom": 156.5
+  },
+  {
+    "page": 12,
+    "title": "Capability reference",
+    "content_bottom": 112.6
+  },
+  {
+    "page": 13,
+    "title": "Invocation surfaces and meaning",
+    "content_bottom": 114.8
+  },
+  {
+    "page": 14,
+    "title": "Handle context as a snapshot",
+    "content_bottom": 140.6
+  },
+  {
+    "page": 15,
+    "title": "TrafficRecord reference",
+    "content_bottom": 142.8
+  },
+  {
+    "page": 16,
+    "title": "Bytes, text and compression",
+    "content_bottom": 172.8
+  },
+  {
+    "page": 17,
+    "title": "The complete bridge surface",
+    "content_bottom": 141.3
+  },
+  {
+    "page": 18,
+    "title": "RequestDraft validation",
+    "content_bottom": 142.3
+  },
+  {
+    "page": 19,
+    "title": "Header rule semantics",
+    "content_bottom": 129.1
+  },
+  {
+    "page": 20,
+    "title": "Response checks and findings",
+    "content_bottom": 85.0
+  },
+  {
+    "page": 21,
+    "title": "Local lab to an attributed finding",
+    "content_bottom": 150.9
+  },
+  {
+    "page": 22,
+    "title": "Build JSON Workbench",
+    "content_bottom": 199.7
+  },
+  {
+    "page": 23,
+    "title": "Workbench markup",
+    "content_bottom": 134.1
+  },
+  {
+    "page": 24,
+    "title": "Workbench styles",
+    "content_bottom": 131.8
+  },
+  {
+    "page": 25,
+    "title": "Workbench state and context",
+    "content_bottom": 131.3
+  },
+  {
+    "page": 26,
+    "title": "Workbench formatting and preview",
+    "content_bottom": 126.3
+  },
+  {
+    "page": 27,
+    "title": "Workbench request handoff",
+    "content_bottom": 181.8
+  },
+  {
+    "page": 28,
+    "title": "Build the installable artifact",
+    "content_bottom": 179.1
+  },
+  {
+    "page": 29,
+    "title": "Run the complete tool journey",
+    "content_bottom": 139.1
+  },
+  {
+    "page": 30,
+    "title": "From capture to a reviewed draft",
+    "content_bottom": 181.9
+  },
+  {
+    "page": 31,
+    "title": "Prepare an edited JSON request",
+    "content_bottom": 155.8
+  },
+  {
+    "page": 32,
+    "title": "Multiple tools in one package",
+    "content_bottom": 137.9
+  },
+  {
+    "page": 33,
+    "title": "Isolation is part of the contract",
+    "content_bottom": 199.4
+  },
+  {
+    "page": 34,
+    "title": "Secure coding for captured data",
+    "content_bottom": 111.9
+  },
+  {
+    "page": 35,
+    "title": "Language and code conventions",
+    "content_bottom": 157.4
+  },
+  {
+    "page": 36,
+    "title": "Modules, typing and packaging",
+    "content_bottom": 159.3
+  },
+  {
+    "page": 37,
+    "title": "Design rules for useful tools",
+    "content_bottom": 161.4
+  },
+  {
+    "page": 38,
+    "title": "Theme, tokens and brand",
+    "content_bottom": 119.5
+  },
+  {
+    "page": 39,
+    "title": "Accessibility acceptance rules",
+    "content_bottom": 153.4
+  },
+  {
+    "page": 40,
+    "title": "Empty, loading and failure states",
+    "content_bottom": 166.2
+  },
+  {
+    "page": 41,
+    "title": "Responsive layout and portability",
+    "content_bottom": 207.6
+  },
+  {
+    "page": 42,
+    "title": "Keep the interface responsive",
+    "content_bottom": 109.0
+  },
+  {
+    "page": 43,
+    "title": "Test behavior at the right layers",
+    "content_bottom": 117.7
+  },
+  {
+    "page": 44,
+    "title": "Schema and contract tests",
+    "content_bottom": 236.0
+  },
+  {
+    "page": 45,
+    "title": "Exercise the real host boundary",
+    "content_bottom": 158.3
+  },
+  {
+    "page": 46,
+    "title": "Compatibility matrix",
+    "content_bottom": 105.3
+  },
+  {
+    "page": 47,
+    "title": "Protocol and capture boundaries",
+    "content_bottom": 183.2
+  },
+  {
+    "page": 48,
+    "title": "Debug in a reproducible order",
+    "content_bottom": 153.5
+  },
+  {
+    "page": 49,
+    "title": "Symptom-to-cause reference",
+    "content_bottom": 220.5
+  },
+  {
+    "page": 50,
+    "title": "Data and rendering failures",
+    "content_bottom": 258.6
+  },
+  {
+    "page": 51,
+    "title": "Package and release responsibly",
+    "content_bottom": 158.8
+  },
+  {
+    "page": 52,
+    "title": "Versioning and maintenance",
+    "content_bottom": 110.2
+  },
+  {
+    "page": 53,
+    "title": "Where to extend the host",
+    "content_bottom": 166.8
+  },
+  {
+    "page": 54,
+    "title": "Limits and gotchas",
+    "content_bottom": 125.1
+  },
+  {
+    "page": 55,
+    "title": "Release acceptance checklist",
+    "content_bottom": 95.3
+  },
+  {
+    "page": 56,
+    "title": "Repository source atlas",
+    "content_bottom": 120.3
+  },
+  {
+    "page": 57,
+    "title": "External standards and guidance",
+    "content_bottom": 248.8
+  },
+  {
+    "page": 58,
+    "title": "Verification record and artifacts",
+    "content_bottom": 84.8
+  },
+  {
+    "page": 59,
+    "title": "Glossary and topic finder",
+    "content_bottom": 104.3
+  }
+]

@@ -1,0 +1,34 @@
+Generator: built-in image_gen tool
+Purpose: initial visual concept for layout discussion; all displayed traffic, counts, status indicators and versions are illustrative.
+
+Use case: ui-mockup.
+Asset type: high fidelity desktop application screenshot concept for THUGSred Glasses, a professional cross-platform HTTP/HTTPS and SOCKS debugging proxy for web security researchers.
+Primary request: Create one exceptionally polished, believable macOS desktop app UI screenshot, landscape approximately 16:10 at high resolution. It should look implementable, precisely typeset, thoughtful, modern and premium, with information density suited to developer tools. Straight-on flat screenshot filling the image, no laptop, no desk, no perspective, no decorative presentation background. Rounded app window corners, modest native macOS traffic-light window buttons.
+Brand/style: Name "Glasses", small "THUGSred" brand label. A simple geometric outline glasses symbol beside the name. Charcoal neutral dark theme, black-grey sidebar, slightly lighter panels, hairline dividers, restrained vivid red accent (#ef4444) for the active navigation item and primary controls. Warm white primary text, legible cool-gray secondary text. Modern clean sans-serif UI typography with monospaced code. Muted mint green, blue, amber for semantic HTTP statuses and method badges. No neon glow, no cyberpunk, no gradients, no fake hacker imagery, no giant cards or marketing slogans. Exceptional alignment and breathing room, real crisp developer tool UI.
+Composition:
+1. Thin title bar full width: native macOS window buttons left; centered "Glasses — Research workspace"; small command palette button with "⌘ K" at right.
+2. Left navigation sidebar about 190px wide. At top minimalist glasses symbol, "Glasses", small "THUGSred". Workspace selector "Research workspace". Navigation with clean thin stroke icons and text: "Traffic" selected with muted red background and small red indicator; "Intercept" with small badge "2"; "Repeater"; "Rules"; "Certificates". Section "EXTENSIONS", then "Plugins" with small badge "3" and "Community" with subtle "Soon" pill. Below a small section "TARGETS" with "All hosts" and indented "api.demo.test", "app.demo.test". Bottom Settings gear and a compact appearance selector labeled "System" with monitor, sun, moon icons. No unrelated OSINT dashboard or made-up threat findings.
+3. Main content top toolbar heading "Traffic", secondary tiny count "128 requests"; at right compact controls "● Capturing" with green dot, "Intercept off" neutral toggle, and red "Open browser" button. Under this toolbar a single long search field "Filter by URL, host, method or status…" with search icon. Small chips "All", "HTTP", "HTTPS", "WebSocket", and "In scope" with filter icon. Subtle icon buttons for clear and export. Avoid extra duplicate navigation.
+4. Upper half of main area is a sharp table taking around 38% of main height. Columns "#", "Method", "Host", "Path", "Status", "Size", "Time", then a slim "Waterfall" column. Six readable rows, each with consistent data. Row 128 GET api.demo.test /v1/products 200 4.2 KB 48 ms; row 127 POST api.demo.test /v1/cart 201 0.8 KB 92 ms; row 126 GET app.demo.test /assets/app.js 200 84 KB 31 ms; row 125 GET api.demo.test /v1/profile 200 1.1 KB 54 ms; row 124 OPTIONS api.demo.test /v1/cart 204 0 B 12 ms; row 123 GET api.demo.test /v1/search?q=glasses 200 2.8 KB 67 ms. Status codes shown with subtle accessible green badge backgrounds, verbs in subtle color. First row 128 is selected with very low contrast red tint, crisp thin red left rule. Waterfall uses tiny understated horizontal timing bars only, no showy charts. Narrow scrollbar.
+5. Divider below traffic table. A selected request summary strip "GET  https://api.demo.test/v1/products", right side buttons "Copy as cURL", "Send to Repeater".
+6. Lower main area about 45% of main height is split into equal Request and Response code inspectors, with a vertical divider. Left heading "Request" and tabs "Headers" selected, "Body", "Raw". Right heading "Response" and small status "200 OK · 48 ms · 4.2 KB"; tabs "Preview", "Headers", "Body" selected, "Raw". Request displays short syntax highlighted monospaced HTTP header lines with line numbers:
+GET /v1/products HTTP/1.1
+Host: api.demo.test
+Accept: application/json
+User-Agent: Glasses Browser
+X-Request-ID: req_0184
+Response shows neatly indented syntax highlighted JSON with line numbers:
+{
+  "products": [
+    {
+      "id": "prod_001",
+      "name": "Demo product",
+      "price": 49.00,
+      "currency": "DKK"
+    }
+  ],
+  "total": 1
+}
+Highlight JSON keys in dusty blue and strings in soft green, numerals in peach. Ample readable code area. Small code search and word-wrap icons.
+7. Slim status bar across bottom: green dot "Proxy running", then "127.0.0.1:8080", "SOCKS5 :1080"; right side small shield icon "Local CA trusted", "3 plugins", "v0.1.0".
+Quality constraints: This is a design concept populated with harmless fictional demo traffic. Do not add callout arrows, captions, annotations, implementation code, watermarks, unrelated brands, or decorative graphs. Keep labels English and accurately spelled. Every pane is rectangular and practical. Focus on beautiful visual hierarchy and usable density. Screenshot should evoke a refined macOS developer tool with THUGSred identity while being realistic to build in Electron.

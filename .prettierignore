@@ -1,0 +1,11 @@
+node_modules/
+dist/
+release/
+test-results/
+package-lock.json
+docs/design/*.prompt.txt
+
+website/
+.build-work/
+tmp/
+.glasses-build.json

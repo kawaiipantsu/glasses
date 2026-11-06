@@ -1,0 +1,13 @@
+Generator: built-in image_gen tool
+Purpose: layout revision; status and traffic are illustrative.
+
+Use case: ui-mockup. Edit the supplied Glasses UI concept. Preserve its polished charcoal and red visual identity, simple red glasses logo, typography, precise alignment, window proportions and practical developer-tool density. Output one high-resolution landscape flat desktop screenshot. This is the agreed visual direction with a small focused layout revision.
+Changes:
+- Remove the entire bottom-left Settings/appearance area: no footer gear, no System selector, no sun or moon buttons in sidebar. Leave that space clean for more target hosts.
+- Add one small gear button with the label "Settings" in the top title bar at far right beside the command shortcut. This opens the application's own dedicated settings pane; do NOT show settings controls on this main screen.
+- Navigation tools in the left sidebar now: Traffic (selected), Intercept with badge 2, Repeater, Timeline, TLS Inspector, Header Hardening, Rules. Under EXTENSIONS keep Plugins and Community (Soon). Remove Certificates from sidebar (certificate setup moves into Settings).
+- Keep targets list visible below these tools.
+- Keep existing traffic table and split request/response layout. Fix row 126 host to app.demo.test.
+- Show a neat realistic right-click context menu floating near the selected first traffic row, about 210 px wide, not too big: heading "REQUEST ACTIONS"; items "Send to Repeater" with shortcut, "Intercept next request", "Show in Timeline", "Inspect TLS", "Check headers"; thin separator; "Copy as cURL", "Copy URL". Use thin stroke icons. Menu should not obscure the request/response code panes.
+- All other major elements unchanged. Preserve factual-looking fictional .test data and the labels Glasses, THUGSred.
+Constraints: do not add a settings window overlay, callout annotations or decorative graphics. Keep all app UI text sharp, correctly spelled, legible and restrained. Preserve single original window screenshot composition.

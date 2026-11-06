@@ -1,0 +1,22 @@
+node_modules/
+dist/
+release/
+test-results/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+.glasses-build.json
+tmp/
+build/native/
+
+.build-work/
+
+# Separate private website and local credentials
+/website/
+*.pem
+*.key
+*.p12
+*.pfx
+/github_master_token.txt

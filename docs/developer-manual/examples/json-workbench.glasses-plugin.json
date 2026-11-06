@@ -1,0 +1,40 @@
+{
+  "apiVersion": 1,
+  "id": "org.example.json-workbench",
+  "name": "JSON Workbench",
+  "version": "1.0.0",
+  "author": "Example Developer",
+  "description": "Format selected JSON locally and prepare a reviewed request draft.",
+  "capabilities": [
+    "ui.tools",
+    "ui.contextMenus",
+    "selection.read",
+    "traffic.readSelected",
+    "text.transform",
+    "repeater.write"
+  ],
+  "rules": [],
+  "checks": [],
+  "tools": [
+    {
+      "id": "workbench",
+      "label": "JSON Workbench"
+    }
+  ],
+  "contextMenus": [
+    {
+      "id": "format-selection",
+      "label": "Format selected JSON",
+      "contexts": [
+        "request.body",
+        "response.body",
+        "repeater"
+      ]
+    }
+  ],
+  "ui": {
+    "html": "<main>\n  <h1>JSON Workbench</h1>\n  <p>Format a selection locally. Review the source before preparing a draft.</p>\n  <p id=\"source\">No selected request.</p>\n  <label for=\"input\">JSON input</label>\n  <textarea id=\"input\" spellcheck=\"false\"\n    aria-describedby=\"hint\" placeholder='{\"hello\":\"Glasses\"}'></textarea>\n  <p id=\"hint\">Up to 256 KiB of UTF-8 input. Nothing is sent automatically.</p>\n  <div class=\"actions\">\n    <button id=\"format\" type=\"button\">Format JSON</button>\n    <button id=\"preview\" type=\"button\" disabled>Open transform preview</button>\n    <button id=\"replay\" type=\"button\" disabled>Prepare original request in Repeater</button>\n    <button id=\"clear\" type=\"button\">Clear input and result</button>\n  </div>\n  <p id=\"status\" role=\"status\" aria-live=\"polite\">Ready for JSON.</p>\n  <h2>Formatted result</h2>\n  <pre id=\"output\" tabindex=\"0\" aria-label=\"Formatted JSON result\"></pre>\n</main>\n",
+    "css": ":root {\n  color-scheme: dark;\n  --surface: #17191f;\n  --raised: #22252e;\n  --text: #e9ebef;\n  --muted: #b4bac8;\n  --accent: #ff7c83;\n  --border: #697285;\n}\n* { box-sizing: border-box; }\nbody {\n  margin: 0; padding: 24px;\n  background: var(--surface); color: var(--text);\n  font: 14px/1.55 system-ui, sans-serif;\n}\nmain { max-width: 960px; margin-inline: auto; }\nh1 { margin: 0 0 8px; font-size: 26px; }\nh2 { font-size: 18px; }\np, #source { color: var(--muted); overflow-wrap: anywhere; }\nlabel { display: block; font-weight: 600; margin: 20px 0 8px; }\nbutton, textarea {\n  font: inherit; border: 1px solid var(--border);\n  border-radius: 7px; background: var(--raised); color: var(--text);\n}\nbutton { min-height: 40px; padding: 9px 12px; white-space: normal; }\nbutton:disabled { opacity: .55; cursor: default; }\ntextarea {\n  width: 100%; min-height: 180px; padding: 12px; resize: vertical;\n  font-family: ui-monospace, monospace;\n}\n.actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }\n:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }\npre {\n  white-space: pre-wrap; overflow-wrap: anywhere; max-height: 420px;\n  overflow: auto; padding: 16px; border: 1px solid var(--border);\n  background: #101216; border-radius: 7px;\n}\n@media (max-width: 560px) {\n  body { padding: 16px; }\n  .actions { flex-direction: column; align-items: stretch; }\n}\n@media (prefers-reduced-motion: reduce) {\n  *, *::before, *::after { animation: none !important; transition: none !important; }\n}\n",
+    "javascript": "(() => {\n  'use strict';\n  const $ = (id) => document.getElementById(id);\n  const input = $('input'), output = $('output'), status = $('status');\n  const preview = $('preview'), replay = $('replay');\n  const encoder = new TextEncoder();\n  const INPUT_LIMIT = 256 * 1024;\n  const RESULT_LIMIT = 512 * 1024;\n  let context = {}, result = '', lastContextKey = '';\n\n  function clearResult(message) {\n    result = '';\n    output.textContent = '';\n    preview.disabled = true;\n    status.textContent = message;\n  }\n\n  function receive(next) {\n    const key = JSON.stringify([\n      next.command, next.view, next.toolId,\n      next.record?.id, next.selection || '',\n    ]);\n    context = next;\n    replay.disabled = !next.record || !/^https?:\\/\\//.test(next.record.url || '');\n    $('source').textContent = next.record\n      ? `${next.record.method} ${next.record.url}`\n      : 'No selected request.';\n    if (key === lastContextKey) return;\n    lastContextKey = key;\n    input.value = next.selection || '';\n    clearResult(input.value ? 'Selection loaded. Choose Format JSON.' : 'Ready for JSON.');\n  }\n\n  glassesPlugin.onContext(receive);\n  if (window.glassesContext) receive(window.glassesContext);\n  input.addEventListener('input', () => clearResult('Input changed. Format again.'));\n\n  $('format').addEventListener('click', () => {\n    clearResult('Formatting...');\n    try {\n      if (input.value.length > INPUT_LIMIT ||\n          encoder.encode(input.value).length > INPUT_LIMIT) {\n        throw new Error('Input exceeds the 256 KiB UTF-8 limit. Select less text.');\n      }\n      const value = JSON.parse(input.value);\n      const formatted = JSON.stringify(value, null, 2);\n      if (formatted.length > RESULT_LIMIT) {\n        throw new Error('Formatted result exceeds the local size limit.');\n      }\n      result = formatted;\n      output.textContent = result;\n      preview.disabled = false;\n      status.textContent = 'Formatted locally. Captured traffic is unchanged.';\n    } catch (error) {\n      // Do not echo parser messages: they can include sensitive input fragments.\n      status.textContent = error.message.startsWith('Input exceeds') ||\n        error.message.startsWith('Formatted result exceeds')\n        ? error.message : 'Invalid JSON. Check quotes, commas and bracket pairs.';\n    }\n  });\n\n  preview.addEventListener('click', () => {\n    if (!preview.disabled && result) glassesPlugin.showText(result);\n  });\n\n  replay.addEventListener('click', () => {\n    const r = context.record;\n    if (!r || replay.disabled) return;\n    const headers = Object.create(null);\n    const omit = new Set([\n      'host', 'content-length', 'connection', 'proxy-connection',\n      'keep-alive', 'transfer-encoding', 'upgrade', 'te', 'trailer',\n      'proxy-authorization', 'proxy-authenticate',\n    ]);\n    const connection = Object.entries(r.requestHeaders || {})\n      .find(([key]) => key.toLowerCase() === 'connection')?.[1];\n    String(connection || '').toLowerCase().split(',')\n      .forEach((name) => omit.add(name.trim()));\n    for (const [name, value] of Object.entries(r.requestHeaders || {})) {\n      if (!omit.has(name.toLowerCase())) headers[name.toLowerCase()] = value;\n    }\n    glassesPlugin.sendToRepeater({\n      url: r.url, method: r.method, headers,\n      body: r.requestBody || '', bodyEncoding: 'base64',\n    });\n    status.textContent = 'Draft requested. Review destination and credentials in Repeater.';\n  });\n\n  $('clear').addEventListener('click', () => {\n    input.value = '';\n    clearResult('Input and result cleared. Source request is still selected.');\n    input.focus();\n  });\n})();\n"
+  }
+}

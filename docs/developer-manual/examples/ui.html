@@ -1,0 +1,18 @@
+<main>
+  <h1>JSON Workbench</h1>
+  <p>Format a selection locally. Review the source before preparing a draft.</p>
+  <p id="source">No selected request.</p>
+  <label for="input">JSON input</label>
+  <textarea id="input" spellcheck="false"
+    aria-describedby="hint" placeholder='{"hello":"Glasses"}'></textarea>
+  <p id="hint">Up to 256 KiB of UTF-8 input. Nothing is sent automatically.</p>
+  <div class="actions">
+    <button id="format" type="button">Format JSON</button>
+    <button id="preview" type="button" disabled>Open transform preview</button>
+    <button id="replay" type="button" disabled>Prepare original request in Repeater</button>
+    <button id="clear" type="button">Clear input and result</button>
+  </div>
+  <p id="status" role="status" aria-live="polite">Ready for JSON.</p>
+  <h2>Formatted result</h2>
+  <pre id="output" tabindex="0" aria-label="Formatted JSON result"></pre>
+</main>

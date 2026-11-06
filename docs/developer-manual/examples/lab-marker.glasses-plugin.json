@@ -1,0 +1,19 @@
+{
+  "apiVersion": 1,
+  "id": "org.example.lab-marker",
+  "name": "Lab Marker",
+  "version": "1.0.0",
+  "author": "Example Developer",
+  "description": "Mark local lab requests for review.",
+  "capabilities": ["request.headers"],
+  "rules": [{
+    "id": "mark-local",
+    "name": "Add local research marker",
+    "enabled": true,
+    "phase": "request",
+    "match": "http://127.0.0.1:",
+    "action": "set-header",
+    "header": "X-Glasses-Research",
+    "value": "manual-example"
+  }]
+}

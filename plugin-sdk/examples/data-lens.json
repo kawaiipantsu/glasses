@@ -1,0 +1,40 @@
+{
+  "apiVersion": 1,
+  "id": "red.thugs.data-lens",
+  "name": "Data Lens",
+  "version": "1.0.0",
+  "author": "THUGSred",
+  "description": "A complete extension tool with JSON inspection and selection-aware context actions.",
+  "capabilities": [
+    "ui.tools",
+    "ui.contextMenus",
+    "selection.read",
+    "traffic.readSelected",
+    "text.transform",
+    "repeater.write"
+  ],
+  "rules": [],
+  "checks": [],
+  "tools": [{ "id": "data-lens", "label": "Data Lens" }],
+  "contextMenus": [
+    {
+      "id": "inspect-selection",
+      "label": "Inspect in Data Lens",
+      "contexts": [
+        "traffic",
+        "request.body",
+        "response.body",
+        "request.headers",
+        "response.headers",
+        "repeater",
+        "intercept",
+        "timeline"
+      ]
+    }
+  ],
+  "ui": {
+    "html": "<h1>Data Lens</h1><p>A community tool can bring its own interface, workflow, and contextual actions.</p><label for='input'>Selected data</label><textarea id='input' placeholder='Select text in a request or response and choose Inspect in Data Lens.'></textarea><div class='actions'><button id='format'>Format JSON</button><button id='decode'>Decode Base64</button><button id='preview'>Open transform preview</button><button id='replay'>Prepare request in Repeater</button></div><pre id='output'>Ready for a selection.</pre><small id='source'></small>",
+    "css": ".actions{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap}h1{color:#f06468}small{color:#9399a8}",
+    "javascript": "const input=document.getElementById('input'),output=document.getElementById('output');let context={};glassesPlugin.onContext(c=>{context=c;input.value=c.selection||'';document.getElementById('source').textContent=c.record?c.record.method+' '+c.record.url:'No selected request';});document.getElementById('format').onclick=()=>{try{output.textContent=JSON.stringify(JSON.parse(input.value),null,2)}catch(e){output.textContent=e.message}};document.getElementById('decode').onclick=()=>{try{output.textContent=new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(atob(input.value),c=>c.charCodeAt(0)))}catch(e){output.textContent=e.message}};document.getElementById('preview').onclick=()=>glassesPlugin.showText(output.textContent);document.getElementById('replay').onclick=()=>{if(!context.record){output.textContent='Select a request first.';return;}const r=context.record;glassesPlugin.sendToRepeater({url:r.url,method:r.method,headers:r.requestHeaders,body:r.requestBody||'',bodyEncoding:'base64'});};"
+  }
+}

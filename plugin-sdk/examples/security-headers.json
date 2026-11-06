@@ -1,0 +1,30 @@
+{
+  "apiVersion": 1,
+  "id": "red.thugs.research-headers",
+  "name": "Research headers",
+  "version": "1.0.0",
+  "author": "THUGSred",
+  "description": "Adds a research marker to local lab requests and checks for a request correlation ID in responses.",
+  "capabilities": ["request.headers", "response.analyze"],
+  "rules": [
+    {
+      "id": "lab-marker",
+      "name": "Mark local lab traffic",
+      "enabled": true,
+      "phase": "request",
+      "match": "http://127.0.0.1:",
+      "action": "set-header",
+      "header": "X-Glasses-Research",
+      "value": "local-lab"
+    }
+  ],
+  "checks": [
+    {
+      "header": "x-request-id",
+      "when": "missing",
+      "value": "",
+      "title": "No request correlation ID",
+      "advice": "Consider adding request IDs to simplify tracing across application services. This is an observability recommendation."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "edition": "2026-11-06",
+  "platform": "Darwin",
+  "architecture": "arm64",
+  "node_observed": "23.6.0",
+  "tests": [
+    {
+      "command": "node --test tests/core.test.cjs tests/security.test.cjs",
+      "result": "passed",
+      "tests": 23
+    },
+    {
+      "command": "npm run build",
+      "result": "passed"
+    },
+    {
+      "command": "node docs/developer-manual/examples/build.cjs",
+      "result": "passed",
+      "package_bytes": 7013
+    },
+    {
+      "command": "node docs/developer-manual/examples/verify.mjs",
+      "result": "passed after isolated listener setup"
+    }
+  ],
+  "pdf": {
+    "pages": 59,
+    "all_pages_rendered": true,
+    "visual_review": "All 59 pages reviewed in contact sheets; representative dense reference, code and accessibility pages reviewed full-size.",
+    "bounds_check": "No out-of-page text; layout builder rejects content below its bottom margin."
+  }
+}

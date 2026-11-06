@@ -1,0 +1,9 @@
+Generator: built-in image_gen tool
+Purpose: approved visual direction, revised brand mark. All traffic is illustrative.
+
+Use case: ui-mockup. Make a tightly scoped branding edit to the supplied THUGSred Glasses desktop UI concept. Preserve the entire existing charcoal/red app layout, navigation, Settings button at top right, context menu, table, code panes, typography and dimensions.
+Change ONLY the branding at the upper left:
+1. The small brand word below "Glasses" must read exactly "THUGSred", all joined with no space: "THUGS" in warm white, and the lowercase suffix "red" in vivid red #ef4444. Spell the combined word exactly T H U G S r e d. Never color the suffix white or gray.
+2. Keep the thin glasses-outline logo vivid red. Behind the actual lens openings add two or three compact rows of subtle monospaced binary digits "10010101" and "01101010", in muted grey/red with reduced contrast. Digits should be clearly recognizable at sidebar logo size, positioned behind/within the lenses, as if the glasses are inspecting binary information. The bright red glasses outline remains dominant and sharply legible. This is a minimal small logo enhancement, not a backdrop for the full sidebar.
+3. Keep the title "Glasses" in warm white as before.
+No other changes. Do not enlarge the logo area, add digital rain, glows, hacker illustration, or decorative patterns elsewhere. Ensure crisp accurate English text and polished developer-tool screenshot style.

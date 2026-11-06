@@ -1,0 +1,84 @@
+name: Verify and package Glasses
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: Build all platform packages on hosted runners
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run native
+      - run: npm run check
+      - run: npm run test:ui
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        if: always()
+        with:
+          name: desktop-test-screenshots
+          path: test-results/
+  package:
+    if: github.event_name == 'workflow_dispatch' && inputs.packages
+    needs: verify
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            target: mac
+            arch: arm64
+            formats: dmg zip
+          - os: macos-15-intel
+            target: mac
+            arch: x64
+            formats: dmg zip
+          - os: ubuntu-24.04
+            target: linux
+            arch: x64
+            formats: tar.gz deb
+          - os: ubuntu-24.04-arm
+            target: linux
+            arch: arm64
+            formats: tar.gz deb
+          - os: windows-2022
+            target: win
+            arch: x64
+            formats: nsis
+          - os: windows-11-arm
+            target: win
+            arch: arm64
+            formats: nsis
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run native
+      - run: npm run check
+      - run: npx electron-builder --${{ matrix.target }} ${{ matrix.formats }} --${{ matrix.arch }} --publish never
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: Glasses-${{ matrix.target }}-${{ matrix.arch }}
+          path: |
+            release/*.dmg
+            release/*.zip
+            release/*.tar.gz
+            release/*.deb
+            release/*.exe
+          if-no-files-found: error

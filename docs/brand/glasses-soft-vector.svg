@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="440" viewBox="0 80 1200 440">
+  <title>Glasses — red acetate sunglasses with binary lens reflections</title>
+  <defs>
+    <path id="left-lens" d="M188 209 C266 187 376 184 469 207 C482 211 485 223 481 244 L454 359 C446 394 425 416 391 422 C357 428 310 425 281 418 C249 410 232 389 223 355 L191 240 C188 229 185 217 188 209 Z"/>
+    <path id="left-frame" fill-rule="evenodd" d="M82 163 C198 127 363 121 503 151 C533 157 549 175 550 200 L518 366 C508 420 478 454 422 465 C378 474 308 471 271 464 C209 454 180 420 166 366 L130 216 L88 208 C72 199 68 180 82 163 Z M188 209 C266 187 376 184 469 207 C482 211 485 223 481 244 L454 359 C446 394 425 416 391 422 C357 428 310 425 281 418 C249 410 232 389 223 355 L191 240 C188 229 185 217 188 209 Z"/>
+    <clipPath id="lens-mask">
+      <use xlink:href="#left-lens"/>
+      <use xlink:href="#left-lens" transform="translate(1200 0) scale(-1 1)"/>
+    </clipPath>
+    <linearGradient id="acetate" x1="0" y1="135" x2="0" y2="476" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff626c"/>
+      <stop offset=".18" stop-color="#f34250"/>
+      <stop offset=".48" stop-color="#d72036"/>
+      <stop offset=".78" stop-color="#d4263b"/>
+      <stop offset="1" stop-color="#a90e2c"/>
+    </linearGradient>
+    <linearGradient id="frame-depth" x1="0" y1="140" x2="0" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c1263b"/>
+      <stop offset="1" stop-color="#6e0d26"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="250" y1="180" x2="410" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#263c50"/>
+      <stop offset=".32" stop-color="#15283b"/>
+      <stop offset=".68" stop-color="#101c2e"/>
+      <stop offset="1" stop-color="#182031"/>
+    </linearGradient>
+    <linearGradient id="glass-reflection" x1="210" y1="180" x2="350" y2="406" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d5eafa" stop-opacity=".23"/>
+      <stop offset=".48" stop-color="#9dbcd7" stop-opacity=".085"/>
+      <stop offset="1" stop-color="#89aac6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lens-edge" x1="0" y1="190" x2="0" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050d1b"/>
+      <stop offset=".55" stop-color="#46182d"/>
+      <stop offset="1" stop-color="#ff929a" stop-opacity=".52"/>
+    </linearGradient>
+    <linearGradient id="plastic-light" x1="160" y1="152" x2="503" y2="192" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffe0df" stop-opacity=".2"/>
+      <stop offset=".42" stop-color="#fff0ee" stop-opacity=".76"/>
+      <stop offset="1" stop-color="#ffc7ca" stop-opacity=".12"/>
+    </linearGradient>
+    <linearGradient id="lower-light" x1="202" y1="358" x2="458" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff949a" stop-opacity=".1"/>
+      <stop offset=".62" stop-color="#ffb2b7" stop-opacity=".46"/>
+      <stop offset="1" stop-color="#ff8e99" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="rivet" x1="0" y1="177" x2="0" y2="195" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffe0df"/>
+      <stop offset=".45" stop-color="#f8a5ac"/>
+      <stop offset="1" stop-color="#912238"/>
+    </linearGradient>
+    <linearGradient id="binary-glow" x1="220" y1="210" x2="414" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c1d7e3" stop-opacity=".16"/>
+      <stop offset=".42" stop-color="#b2cddc" stop-opacity=".41"/>
+      <stop offset="1" stop-color="#9ab6ca" stop-opacity=".08"/>
+    </linearGradient>
+    <g id="left-plastic-light">
+<path d="M113 167 C227 135 372 136 488 161 C510 166 525 177 530 190" fill="none" stroke="url(#plastic-light)" stroke-width="17" stroke-opacity="0.015" stroke-linecap="round"/>
+<path d="M113 167 C227 135 372 136 488 161 C510 166 525 177 530 190" fill="none" stroke="url(#plastic-light)" stroke-width="15" stroke-opacity="0.035" stroke-linecap="round"/>
+<path d="M113 167 C227 135 372 136 488 161 C510 166 525 177 530 190" fill="none" stroke="url(#plastic-light)" stroke-width="13" stroke-opacity="0.065" stroke-linecap="round"/>
+<path d="M113 167 C227 135 372 136 488 161 C510 166 525 177 530 190" fill="none" stroke="url(#plastic-light)" stroke-width="11" stroke-opacity="0.1" stroke-linecap="round"/>
+<path d="M113 167 C227 135 372 136 488 161 C510 166 525 177 530 190" fill="none" stroke="url(#plastic-light)" stroke-width="9" stroke-opacity="0.14" stroke-linecap="round"/>
+<path d="M113 167 C227 135 372 136 488 161 C510 166 525 177 530 190" fill="none" stroke="url(#plastic-light)" stroke-width="7" stroke-opacity="0.18" stroke-linecap="round"/>
+<path d="M113 167 C227 135 372 136 488 161 C510 166 525 177 530 190" fill="none" stroke="url(#plastic-light)" stroke-width="6" stroke-opacity="0.2" stroke-linecap="round"/>
+<path d="M178 272 L200 366 C212 412 239 435 280 444 C323 454 375 455 412 447 C445 440 466 424 480 399" fill="none" stroke="url(#lower-light)" stroke-width="15" stroke-opacity="0.015" stroke-linecap="round"/>
+<path d="M178 272 L200 366 C212 412 239 435 280 444 C323 454 375 455 412 447 C445 440 466 424 480 399" fill="none" stroke="url(#lower-light)" stroke-width="13" stroke-opacity="0.035" stroke-linecap="round"/>
+<path d="M178 272 L200 366 C212 412 239 435 280 444 C323 454 375 455 412 447 C445 440 466 424 480 399" fill="none" stroke="url(#lower-light)" stroke-width="11" stroke-opacity="0.065" stroke-linecap="round"/>
+<path d="M178 272 L200 366 C212 412 239 435 280 444 C323 454 375 455 412 447 C445 440 466 424 480 399" fill="none" stroke="url(#lower-light)" stroke-width="9" stroke-opacity="0.1" stroke-linecap="round"/>
+<path d="M178 272 L200 366 C212 412 239 435 280 444 C323 454 375 455 412 447 C445 440 466 424 480 399" fill="none" stroke="url(#lower-light)" stroke-width="7" stroke-opacity="0.14" stroke-linecap="round"/>
+<path d="M178 272 L200 366 C212 412 239 435 280 444 C323 454 375 455 412 447 C445 440 466 424 480 399" fill="none" stroke="url(#lower-light)" stroke-width="5" stroke-opacity="0.18" stroke-linecap="round"/>
+<path d="M178 272 L200 366 C212 412 239 435 280 444 C323 454 375 455 412 447 C445 440 466 424 480 399" fill="none" stroke="url(#lower-light)" stroke-width="4" stroke-opacity="0.2" stroke-linecap="round"/>
+<path d="M160 219 C178 216 182 238 185 251" fill="none" stroke="#ffbcc0" stroke-width="14" stroke-opacity="0.00375" stroke-linecap="round"/>
+<path d="M160 219 C178 216 182 238 185 251" fill="none" stroke="#ffbcc0" stroke-width="12" stroke-opacity="0.00875" stroke-linecap="round"/>
+<path d="M160 219 C178 216 182 238 185 251" fill="none" stroke="#ffbcc0" stroke-width="10" stroke-opacity="0.01625" stroke-linecap="round"/>
+<path d="M160 219 C178 216 182 238 185 251" fill="none" stroke="#ffbcc0" stroke-width="8" stroke-opacity="0.025" stroke-linecap="round"/>
+<path d="M160 219 C178 216 182 238 185 251" fill="none" stroke="#ffbcc0" stroke-width="6" stroke-opacity="0.035" stroke-linecap="round"/>
+<path d="M160 219 C178 216 182 238 185 251" fill="none" stroke="#ffbcc0" stroke-width="4" stroke-opacity="0.045" stroke-linecap="round"/>
+<path d="M160 219 C178 216 182 238 185 251" fill="none" stroke="#ffbcc0" stroke-width="3" stroke-opacity="0.05" stroke-linecap="round"/>
+<path d="M505 230 L480 358" fill="none" stroke="#8e102c" stroke-width="14" stroke-opacity="0.00645" stroke-linecap="round"/>
+<path d="M505 230 L480 358" fill="none" stroke="#8e102c" stroke-width="12" stroke-opacity="0.015050000000000001" stroke-linecap="round"/>
+<path d="M505 230 L480 358" fill="none" stroke="#8e102c" stroke-width="10" stroke-opacity="0.02795" stroke-linecap="round"/>
+<path d="M505 230 L480 358" fill="none" stroke="#8e102c" stroke-width="8" stroke-opacity="0.043000000000000003" stroke-linecap="round"/>
+<path d="M505 230 L480 358" fill="none" stroke="#8e102c" stroke-width="6" stroke-opacity="0.060200000000000004" stroke-linecap="round"/>
+<path d="M505 230 L480 358" fill="none" stroke="#8e102c" stroke-width="4" stroke-opacity="0.0774" stroke-linecap="round"/>
+<path d="M505 230 L480 358" fill="none" stroke="#8e102c" stroke-width="3" stroke-opacity="0.08600000000000001" stroke-linecap="round"/>
+</g>
+  </defs>
+
+  <g id="Acetate-depth" transform="translate(0 8)" fill="url(#frame-depth)">
+    <use xlink:href="#left-frame"/>
+    <use xlink:href="#left-frame" transform="translate(1200 0) scale(-1 1)"/>
+    <path d="M517 174 C568 151 632 151 683 174 L678 215 C628 195 572 195 522 215 Z"/>
+  </g>
+  <g id="Dark-optical-lenses" fill="url(#glass)">
+    <use xlink:href="#left-lens"/>
+    <use xlink:href="#left-lens" transform="translate(1200 0) scale(-1 1)"/>
+  </g>
+  <g id="Reflections-in-glass" clip-path="url(#lens-mask)">
+    <g id="Feathered-window-reflections"><g opacity="0.2" transform="translate(0 0)"><g id="Soft-window-reflection-0" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(-3 0)"><g id="Soft-window-reflection-1" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(3 0)"><g id="Soft-window-reflection-2" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(0 -3)"><g id="Soft-window-reflection-3" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(0 3)"><g id="Soft-window-reflection-4" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(-2 -2)"><g id="Soft-window-reflection-5" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(2 -2)"><g id="Soft-window-reflection-6" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(-2 2)"><g id="Soft-window-reflection-7" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g>
+<g opacity="0.1" transform="translate(2 2)"><g id="Soft-window-reflection-8" fill="url(#glass-reflection)">
+      <path d="M153 182 L363 157 L515 365 L406 446 Z"/>
+      <path d="M153 182 L363 157 L515 365 L406 446 Z" transform="translate(1200 0) scale(-1 1)"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5"/>
+      <path d="M204 158 L237 152 L483 431 L451 446 Z" opacity=".5" transform="translate(1200 0) scale(-1 1)"/>
+    </g></g></g>
+    <g id="Left-binary-reflection" font-family="Menlo, monospace" font-size="22" letter-spacing="4" fill="url(#binary-glow)" transform="rotate(-8 335 308)">
+      <text x="221" y="245">10100110101</text>
+      <text x="218" y="278">01011001010</text>
+      <text x="221" y="311">11010100101</text>
+      <text x="225" y="344">00101011010</text>
+      <text x="232" y="377">10110010101</text>
+      <text x="240" y="410">01001101010</text>
+    </g>
+    <g id="Right-binary-reflection" font-family="Menlo, monospace" font-size="22" letter-spacing="4" fill="url(#binary-glow)" transform="translate(620 0) rotate(8 245 308)">
+      <text x="126" y="245">01011001010</text>
+      <text x="126" y="278">10100110101</text>
+      <text x="126" y="311">01101001011</text>
+      <text x="126" y="344">10010110100</text>
+      <text x="126" y="377">01001101010</text>
+      <text x="126" y="410">10110010101</text>
+    </g>
+    <path d="M188 212 C271 189 377 188 469 210 M731 210 C823 188 929 189 1012 212" fill="none" stroke="#96b8cb" stroke-opacity=".28" stroke-width="3"/>
+  </g>
+  <g id="Red-acetate-frame" fill="url(#acetate)" stroke="#a81b31" stroke-width="2">
+    <use xlink:href="#left-frame"/>
+    <use xlink:href="#left-frame" transform="translate(1200 0) scale(-1 1)"/>
+    <path d="M517 174 C568 151 632 151 683 174 L678 215 C628 195 572 195 522 215 Z" stroke="none"/>
+  </g>
+  <g id="Polished-inner-bevel" fill="none" stroke="url(#lens-edge)" stroke-width="4">
+    <use xlink:href="#left-lens"/>
+    <use xlink:href="#left-lens" transform="translate(1200 0) scale(-1 1)"/>
+  </g>
+  <g id="Polished-acetate-soft-highlights" opacity=".8">
+<use xlink:href="#left-plastic-light"/>
+<use xlink:href="#left-plastic-light" transform="translate(1200 0) scale(-1 1)"/>
+<path d="M549 176 C582 167 618 167 651 176" fill="none" stroke="#ffc5c7" stroke-width="15" stroke-opacity="0.00735" stroke-linecap="round"/>
+<path d="M549 176 C582 167 618 167 651 176" fill="none" stroke="#ffc5c7" stroke-width="13" stroke-opacity="0.017150000000000002" stroke-linecap="round"/>
+<path d="M549 176 C582 167 618 167 651 176" fill="none" stroke="#ffc5c7" stroke-width="11" stroke-opacity="0.03185" stroke-linecap="round"/>
+<path d="M549 176 C582 167 618 167 651 176" fill="none" stroke="#ffc5c7" stroke-width="9" stroke-opacity="0.049" stroke-linecap="round"/>
+<path d="M549 176 C582 167 618 167 651 176" fill="none" stroke="#ffc5c7" stroke-width="7" stroke-opacity="0.06860000000000001" stroke-linecap="round"/>
+<path d="M549 176 C582 167 618 167 651 176" fill="none" stroke="#ffc5c7" stroke-width="5" stroke-opacity="0.0882" stroke-linecap="round"/>
+<path d="M549 176 C582 167 618 167 651 176" fill="none" stroke="#ffc5c7" stroke-width="4" stroke-opacity="0.098" stroke-linecap="round"/>
+<path d="M557 202 Q600 190 643 202" fill="none" stroke="#9b1730" stroke-width="13" stroke-opacity="0.0069" stroke-linecap="round"/>
+<path d="M557 202 Q600 190 643 202" fill="none" stroke="#9b1730" stroke-width="11" stroke-opacity="0.016100000000000003" stroke-linecap="round"/>
+<path d="M557 202 Q600 190 643 202" fill="none" stroke="#9b1730" stroke-width="9" stroke-opacity="0.029900000000000003" stroke-linecap="round"/>
+<path d="M557 202 Q600 190 643 202" fill="none" stroke="#9b1730" stroke-width="7" stroke-opacity="0.046000000000000006" stroke-linecap="round"/>
+<path d="M557 202 Q600 190 643 202" fill="none" stroke="#9b1730" stroke-width="5" stroke-opacity="0.06440000000000001" stroke-linecap="round"/>
+<path d="M557 202 Q600 190 643 202" fill="none" stroke="#9b1730" stroke-width="3" stroke-opacity="0.0828" stroke-linecap="round"/>
+<path d="M557 202 Q600 190 643 202" fill="none" stroke="#9b1730" stroke-width="2" stroke-opacity="0.09200000000000001" stroke-linecap="round"/>
+</g>
+  <g id="Temple-hardware" fill="url(#rivet)" stroke="#9d2337" stroke-width="1.5">
+    <path d="M112 181 L137 176 Q143 175 144 180 L145 185 Q146 190 140 191 L116 196 Q111 197 110 192 L109 187 Q108 183 112 181 Z"/>
+    <path d="M1088 181 L1063 176 Q1057 175 1056 180 L1055 185 Q1054 190 1060 191 L1084 196 Q1089 197 1090 192 L1091 187 Q1092 183 1088 181 Z"/>
+  </g>
+</svg>

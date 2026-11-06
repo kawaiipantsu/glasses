@@ -1,0 +1,138 @@
+{
+  "name": "thugsred-glasses",
+  "productName": "Glasses",
+  "version": "0.1.0",
+  "description": "THUGSred web security research and debugging proxy",
+  "author": "THUGSred <hello@thugs.red>",
+  "homepage": "https://glasses.thugs.red",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "npm run native && node scripts/dev.mjs",
+    "build": "tsc --noEmit && vite build",
+    "start": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "test:ui": "node scripts/smoke.mjs",
+    "check": "npm run build && npm test",
+    "dist:mac": "npm run native && npm run build && electron-builder --mac dmg zip --arm64 --x64",
+    "dist:mac:local": "npm run native && npm run build && electron-builder --mac dmg --arm64",
+    "dist:linux": "npm run build && electron-builder --linux tar.gz deb --arm64 --x64",
+    "dist:win": "npm run build && electron-builder --win nsis --x64 && electron-builder --win nsis --arm64",
+    "pack": "npm run build && electron-builder --dir",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "security:check": "npm run check && npm audit --audit-level=high",
+    "test:packaged": "node scripts/smoke-packaged.mjs",
+    "icons": "node scripts/icons.mjs",
+    "native": "node scripts/native.mjs",
+    "test:recovery": "node scripts/recovery-smoke.mjs",
+    "release:all": "node scripts/releases.mjs all",
+    "release:windows": "node scripts/releases.mjs win",
+    "release:linux": "node scripts/releases.mjs linux"
+  },
+  "dependencies": {
+    "node-forge": "^1.4.3",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0",
+    "lucide-react": "^0.468.0",
+    "playwright": "^1.56.0",
+    "prettier": "^3.9.10",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.35.5",
+    "typescript": "^5.9.0",
+    "vite": "^7.0.0"
+  },
+  "overrides": {
+    "app-builder-lib": {
+      "minimatch": "^11.0.1"
+    },
+    "@electron/universal": {
+      "minimatch": "^11.0.1"
+    }
+  },
+  "build": {
+    "appId": "red.thugs.glasses",
+    "productName": "Glasses",
+    "artifactName": "Glasses-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "core/**/*",
+      "plugin-sdk/**/*",
+      "build/icon.png",
+      "package.json",
+      "LICENSE",
+      "LICENSES/**/*"
+    ],
+    "asar": true,
+    "electronFuses": {
+      "runAsNode": false,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true,
+      "grantFileProtocolExtraPrivileges": false,
+      "resetAdHocDarwinSignature": true
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": true,
+      "icon": "build/icon.icns",
+      "extraResources": [
+        {
+          "from": "build/native/proxy-helper",
+          "to": "proxy-helper"
+        }
+      ]
+    },
+    "linux": {
+      "category": "Development",
+      "target": [
+        "tar.gz",
+        "deb"
+      ],
+      "icon": "build/icon.png",
+      "maintainer": "THUGSred <hello@thugs.red>",
+      "syncDesktopName": true
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "publish": null
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "desktopName": "red.thugs.glasses.desktop",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kawaiipantsu/glasses.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kawaiipantsu/glasses/issues"
+  }
+}
