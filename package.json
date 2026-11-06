@@ -29,7 +29,8 @@
     "test:recovery": "node scripts/recovery-smoke.mjs",
     "release:all": "node scripts/releases.mjs all",
     "release:windows": "node scripts/releases.mjs win",
-    "release:linux": "node scripts/releases.mjs linux"
+    "release:linux": "node scripts/releases.mjs linux",
+    "test:community": "node scripts/community-smoke.mjs"
   },
   "dependencies": {
     "node-forge": "^1.4.3",
@@ -122,7 +123,15 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
-    "publish": null
+    "publish": null,
+    "protocols": [
+      {
+        "name": "Glasses Community",
+        "schemes": [
+          "glasses"
+        ]
+      }
+    ]
   },
   "engines": {
     "node": ">=22.12.0"

@@ -102,4 +102,8 @@ Extension HTML/JS is served through a separate custom scheme and rendered in an 
 
 No arbitrary extension JavaScript runs in the Node main process or proxy engine. No direct filesystem, shell, OS APIs or clipboard permissions are exposed. These restrictions are part of the first-release design; they are not a substitute for an independent audit or a future signed publisher ecosystem.
 
-Future versions may add negotiated API revisions, packaged assets, persistent per-plugin state, proxy hook workers, trusted integration brokers, a signed catalog and automatic updates. API v1 does not silently grant these privileges.
+Future versions may add negotiated API revisions, packaged assets, persistent per-plugin state, proxy hook workers, trusted integration brokers and automatic updates. API v1 does not silently grant these privileges.
+
+## Community distribution
+
+The app can verify and install the same JSON manifest through the community service. Browser links queue an explicit capability review; updates require a greater version and another approval. The publisher uploads through the separate website. See [Community installation and trust](../docs/COMMUNITY.md) for the signed envelope, origin restrictions, key rotation and current service acceptance status. Local installation remains supported.

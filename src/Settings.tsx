@@ -567,15 +567,22 @@ export default function Settings({
               <div className="settings-group">
                 <div className="group-title">
                   <h3>Community services</h3>
-                  <Pill tone="amber">Not connected</Pill>
+                  <Pill>{draft.communityEnabled ? 'Enabled' : 'Offline'}</Pill>
                 </div>
                 <p>
-                  The plugin catalog, community accounts, publishing, ratings, and automatic updates
-                  will arrive with the shop backend. No traffic or plugin activity is sent to a
-                  community service.
+                  Browse approved packages and review signed downloads in Community. Only catalog
+                  queries and package identifiers are sent; captured traffic is never uploaded.
+                  Publishing and accounts are handled on the website.
                 </p>
+                <Row title="Allow community connections">
+                  <Toggle
+                    checked={draft.communityEnabled}
+                    onChange={(communityEnabled) => set('communityEnabled', communityEnabled)}
+                    label="Allow community connections"
+                  />
+                </Row>
                 <Row title="Community account">
-                  <span className="muted">Unavailable in 0.1</span>
+                  <span className="muted">Not needed to browse or install</span>
                 </Row>
                 <Row title="Automatic plugin updates">
                   <Toggle
@@ -639,8 +646,8 @@ export default function Settings({
                 glasses.thugs.red
               </button>
               <p>
-                The official Glasses home. The community catalog and extension services are planned
-                for this address.
+                The official Glasses home and community address. Browse and review extensions in
+                Community when the service is available.
               </p>
               <h1>Look closer.</h1>
               <p>

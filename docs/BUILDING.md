@@ -20,7 +20,7 @@ colima start glasses-build --arch x86_64 --cpu 4 --memory 4 \
   --disk 40 --root-disk 40 --activate=false --vm-type=qemu
 ```
 
-The dedicated profile keeps build images separate from other Docker projects. The first image download is large; later builds reuse it. x86_64 emulation on Apple Silicon is slower than native packaging.
+The dedicated profile keeps build images separate from other Docker projects. The first image download is large; later builds reuse it. Local workers compile on their disposable container filesystem; named `glasses-build-*` Docker volumes retain only npm/Electron/builder download caches, not a source checkout. x86_64 emulation on Apple Silicon is slower than native packaging.
 
 Copy the example to the ignored local configuration file:
 
@@ -72,6 +72,7 @@ The GitHub workflow runs verification on pushes and pull requests. Hosted multi-
 
 ```sh
 npm run test:ui           # isolated Electron desktop checks and screenshots
+npm run test:community    # signed community review/install/update with isolated fixtures
 npm run test:recovery     # test-profile routing guard and quit/recovery behavior
 npm run test:packaged     # hardened macOS ARM64 package smoke after packaging
 npm run security:check    # build, integration tests, dependency audit

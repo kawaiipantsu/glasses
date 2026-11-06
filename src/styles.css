@@ -2722,3 +2722,124 @@ tbody tr.selected > td:first-child {
   border-left: 2px solid var(--accent);
   margin: 12px 0;
 }
+
+/* Community browsing is app-rendered text; remote package UI stays inactive until approval. */
+.community-search {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+}
+.community-search label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.community-search input {
+  width: 100%;
+}
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 18px;
+}
+.community-card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.community-card h2,
+.community-card p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.community-card code {
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+.community-card-top,
+.community-card-footer,
+.community-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.community-card-footer {
+  margin-top: auto;
+  padding-top: 12px;
+}
+.community-card small {
+  color: var(--muted);
+}
+.community-intent {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 20px 0;
+}
+.community-intent > div {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.community-intent p {
+  margin: 7px 0;
+}
+.community-page .community-hero > small {
+  display: block;
+  color: var(--muted);
+  margin-top: 16px;
+}
+.community-pagination {
+  justify-content: center;
+  margin-top: 24px;
+}
+.community-permissions > div {
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.community-permissions p {
+  margin: 6px 0;
+  color: var(--muted);
+}
+.community-permissions .pill {
+  margin-left: 10px;
+}
+.community-hash {
+  overflow-wrap: anywhere;
+  display: block;
+}
+.community-review {
+  max-height: 75vh;
+  overflow: auto;
+}
+.community-review details {
+  margin: 18px 0;
+}
+
+.modal:has(.community-review) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal:has(.community-review) .modal-title {
+  flex-shrink: 0;
+}
+.community-review {
+  min-height: 0;
+  flex: 1;
+  max-height: none;
+}
+.community-review-actions {
+  flex-shrink: 0;
+  padding: 16px 23px;
+  margin: 0;
+  border-top: 1px solid var(--border);
+}

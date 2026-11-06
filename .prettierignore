@@ -9,3 +9,6 @@ website/
 .build-work/
 tmp/
 .glasses-build.json
+
+# Tutorial excerpts have fixed line ranges and PDF code-width checks.
+docs/developer-manual/examples/

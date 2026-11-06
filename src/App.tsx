@@ -48,7 +48,9 @@ import {
 import Traffic, { type RecordAction, type ShowMenu } from './Traffic';
 import Repeater, { Intercept, type RepeaterSeed } from './Repeater';
 import { HeaderInspector, Timeline, TLSInspector } from './Inspectors';
-import { Community, Plugins, Rules } from './Extensions';
+import { Plugins, Rules } from './Extensions';
+import Community from './Community';
+import type { CommunityIntent } from './types';
 import Settings from './Settings';
 import PluginView, { type ExtensionContext } from './PluginView';
 const navigation = [
@@ -67,6 +69,7 @@ export default function App() {
     [status, setStatus] = useState<Status>(),
     [settings, setSettings] = useState<SettingsValue>(),
     [plugins, setPlugins] = useState<Plugin[]>([]),
+    [installIntent, setInstallIntent] = useState<CommunityIntent>(),
     [rules, setRules] = useState<Rule[]>([]),
     [systemDark, setSystemDark] = useState(true),
     [view, setView] = useState<View>('traffic'),
@@ -151,7 +154,11 @@ export default function App() {
       else if (type === 'status') setStatus(data);
       else if (type === 'job') setJobRaw(data);
       else if (type === 'appearance') setSystemDark(data);
-      else if (type === 'navigate') setView(data);
+      else if (type === 'plugins') setPlugins(data);
+      else if (type === 'communityIntent') {
+        setInstallIntent(data);
+        setView('community');
+      } else if (type === 'navigate') setView(data);
       else if (type === 'error') notify(data);
     });
     api
@@ -165,6 +172,10 @@ export default function App() {
         setStatus(value.status);
         setSystemDark(value.dark);
         if (value.warning) notify(value.warning);
+        if (value.installIntent) {
+          setInstallIntent(value.installIntent);
+          setView('community');
+        }
       })
       .catch((e) => setError(e.message));
     return unsubscribe;
@@ -481,7 +492,6 @@ export default function App() {
               >
                 <Users size={19} />
                 <span>Community</span>
-                <span className="soon">Soon</span>
               </button>
               {enabledTools.map(({ plugin, tool }) => (
                 <button
@@ -658,10 +668,34 @@ export default function App() {
             {view === 'plugins' && (
               <Plugins plugins={plugins} setPlugins={setPlugins} invoke={invoke} notify={notify} />
             )}
-            {view === 'community' && <Community openPlugins={() => setView('plugins')} />}
+            {view === 'community' && (
+              <Community
+                plugins={plugins}
+                setPlugins={setPlugins}
+                enabled={settings.communityEnabled}
+                protocolRegistered={data.communityProtocolRegistered}
+                intent={installIntent}
+                dismissIntent={() => {
+                  if (installIntent) void invoke('communityDismissIntent', installIntent.nonce);
+                  setInstallIntent(undefined);
+                }}
+                connect={async () => {
+                  const result = await invoke<{ settings: SettingsValue }>('settings', {
+                    ...settings,
+                    communityEnabled: true,
+                  });
+                  if (result) setSettings(result.settings);
+                  return Boolean(result);
+                }}
+                openPlugins={() => setView('plugins')}
+                invoke={invoke}
+                notify={notify}
+              />
+            )}
             {view === 'extension' &&
               (currentPlugin && extension ? (
                 <PluginView
+                  key={currentPlugin.manifest.id + ':' + currentPlugin.manifest.version}
                   plugin={currentPlugin}
                   context={extension.context}
                   sendToRepeater={sendDraft}

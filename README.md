@@ -115,7 +115,16 @@ The extension API supports **complete tools**, **view-specific context menus**, 
 - [Developer manual — Extension API v1](output/pdf/Glasses-Developer-Manual-API-v1.pdf)
 - [Tutorial companion archive](output/pdf/Glasses-Developer-Manual-Companion.zip)
 
-Local extensions work today. The online community catalog, publishing service, and signed distribution are being developed separately at [glasses.thugs.red](https://glasses.thugs.red).
+The Community pane supports catalog browsing, Ed25519-verified downloads, browser install links, and permission-reviewed updates. Connections are opt-in; manual file installation remains available. The website service is deployed separately, and live catalog acceptance is pending. [Installation and trust details →](docs/COMMUNITY.md)
+
+<details>
+<summary><strong>Preview the Community install flow</strong></summary>
+
+![Community catalog and browser install handoff using a local test publisher](docs/screenshots/community.png)
+
+The real application UI above uses a signed local test fixture. It demonstrates the app-side flow while the separate backend is being brought online.
+
+</details>
 
 ## Guides worth keeping
 

@@ -1,6 +1,6 @@
 # THUGSred Glasses
 
-A desktop workspace for web security research and development. Electron + React + TypeScript UI, independently testable Node.js proxy core, local extension system. Version **0.1.0**. Official home: [glasses.thugs.red](https://glasses.thugs.red). The website is maintained separately; the community backend is planned.
+A desktop workspace for web security research and development. Electron + React + TypeScript UI, independently testable Node.js proxy core, local extension system. Version **0.1.0**. Official home: [glasses.thugs.red](https://glasses.thugs.red). The website is maintained separately; [Community browsing and signed installation](COMMUNITY.md) use its public API.
 
 ## Illustrated guides
 
@@ -131,6 +131,6 @@ HTTP/2, HTTP/3/QUIC, gRPC semantics and SOCKS UDP are not implemented. WebSocket
 
 Request bodies exceeding the configured limit are rejected. Larger responses continue streaming while only the configured prefix is captured; they cannot be paused for whole-body edits. Session history is capped by entry count and approximately 128 MiB of stored base64 bodies. In-flight transfers and renderer overhead are additional memory. Timings are proxy observations, not browser rendering metrics. HAR import normalizes some metadata and does not restore original per-phase timings.
 
-Header findings are context-dependent advice, not proof of exploitability. Local extension publishers are self-declared. The community catalog/backend, signed plugin distribution and automatic updates are deferred. Plugins receive no direct Node, filesystem, network or unrestricted IPC access.
+Header findings are context-dependent advice, not proof of exploitability. Local extension publishers are self-declared. Community catalog browsing, signed package verification and reviewed updates are implemented; live service acceptance is tracked separately. Automatic updates are deferred. Plugins receive no direct Node, filesystem, network or unrestricted IPC access.
 
 This is a usable first release for iteration and testing. Further protocol coverage, performance profiling, independent security review, signed distribution and enterprise deployment controls remain before describing it as an enterprise-hardened product.

@@ -24,7 +24,7 @@ Glasses handles hostile web content by design. Captured requests/responses, head
 | Stalled interception / fuzz jobs      | Bounded queues, request/interception deadlines, iteration/concurrency limits, cancellation wakes all delayed workers                                    | Drop, cancellation and concurrent-delay tests                                                |
 | Secret disclosure through diagnostics | Rotating local operational metadata logs; no URLs, headers, bodies, raw errors or CA keys in those logs                                                 | Log-field and file-permission test                                                           |
 | Private local state                   | Per-install CA; private key/file modes; atomic settings writes with unique exclusive temp files; captures saved only on explicit export                 | Filesystem checks and code review                                                            |
-| Supply-chain drift                    | npm lockfile; pinned Electron version; scoped patched build dependency overrides; pinned CI action commits; npm audit / CodeQL workflow                 | Local npm audit and tests; CodeQL is configured, not claimed executed locally                |
+| Supply-chain drift                    | npm lockfile; pinned Electron version; scoped patched build dependency overrides; pinned CI action commits; npm audit / CodeQL workflow                 | Local npm audit and tests; initial GitHub CodeQL and dependency workflows passed             |
 | Packaged runtime abuse                | Disable RunAsNode, NODE_OPTIONS/NODE_EXTRA_CA_CERTS and Node inspect flags; require ASAR; enable ASAR integrity; disable extra file-protocol privileges | Fuse inspection and packaged startup/interaction check                                       |
 
 The application does **not** sanitize or rewrite the captured evidence to make it look safe. It encodes content at the display boundary. Raw captured bytes remain exportable within the configured capture budget. It does not block ordinary local/private research targets. Limits protect the application and are documented; protocol-specific fidelity remains explicit.
@@ -57,7 +57,7 @@ Primary references: [Apple SCPreferences](https://developer.apple.com/documentat
 - Loopback binding is not local-user authentication. Other programs running on the same machine may use the listener while it is enabled. Remote/LAN proxy binding and authentication are not part of 0.1.
 - The proxy uses Node's structured HTTP parser. It is not a raw TCP request-smuggling laboratory and does not promise malformed-wire preservation.
 - Captures/exports may contain credentials. File permissions are not encrypted storage. Redacted export and encrypted project vaults are future options.
-- Plugin publishers are self-declared. Catalog signing, package provenance, update verification, community-account authentication and authorized integration brokers belong to the future backend.
+- Local plugin authors are self-declared. Community signatures authenticate distribution through the pinned service key, not author identity or code safety. Automatic updates, runtime revocation, and privileged integration brokers are not implemented.
 - Code signing, notarization, a verified update channel and enterprise management are release work, not claims made by this local prototype.
 
 ## Guidance reviewed
@@ -69,3 +69,7 @@ Generic server advice is adapted to this application: account MFA does not apply
 ## Reporting an issue
 
 Use an established private THUGSred contact channel for exploitable findings; a dedicated security-reporting endpoint has not yet been configured. Include version, platform, minimal local reproduction and expected/actual behavior. Avoid posting real captured credentials or private CA keys in a public issue.
+
+## Community distribution boundary
+
+Online connections require opt-in. The renderer cannot request arbitrary URLs: main builds fixed HTTPS endpoints from validated IDs/versions. It verifies pinned Ed25519 signatures, exact payload bytes, short-lived authorization, identity, capability set, byte length and SHA-256, then applies the plugin validator. Redirects and research-CA trust are refused. Deep links queue a review request without installing code. One-use review tickets remain in main memory; activation requires an explicit install action. Updates cannot replace local-source IDs or downgrade versions, and installation checks that the previous state still matches the review. Failed persistence rolls back in-memory state. See [Community trust details](docs/COMMUNITY.md).

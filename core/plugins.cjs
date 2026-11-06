@@ -164,6 +164,18 @@ class Plugins {
         this.items = JSON.parse(fs.readFileSync(this.file, 'utf8')).map((p) => ({
           manifest: pluginSchema.parse(p.manifest),
           enabled: p.enabled === true,
+          ...(p.community
+            ? {
+                community: z
+                  .object({
+                    keyId: z.string().max(80),
+                    sha256: z.string().regex(/^[a-f0-9]{64}$/),
+                    installedAt: z.string().datetime(),
+                  })
+                  .strict()
+                  .parse(p.community),
+              }
+            : {}),
         }));
       } catch {
         this.items = [];

@@ -11,7 +11,7 @@ page('Front matter','About this edition','A practical implementation guide for G
  ('Review or release a package','Testing, troubleshooting, packaging and release checklist.')],[.36,.64]),
  h('How to read requirements'),
  p('<b>Contract</b> describes behavior enforced or implemented by this source snapshot. <b>Recommendation</b> is guidance proposed by this manual for robust extensions. <b>Boundary</b> identifies unsupported functionality or an implementation limitation. Recommendations do not imply a host validation rule.'),
- note('Source baseline','Reviewed on 6 November 2026. package.json reports 0.1.0. The workspace has no Git commit yet, so the companion source fingerprint file identifies the reviewed files. The runtime validators take precedence over broad TypeScript types or older prose.'),
+ note('Source baseline','Reviewed on 6 November 2026. package.json reports 0.1.0. The companion source fingerprint file identifies the reviewed source, including the community client update. The runtime validators take precedence over broad TypeScript types or older prose.'),
  p('The examples use local lab data. They do not add a network API or scanner engine. Review destinations and credentials before sending any prepared request. The final chapters distinguish tests run for this manual from previously reported platform verification.'),
 ])
 page('Front matter','Contents / build and integrate','Click a topic or use your PDF viewer bookmarks.')
@@ -32,7 +32,7 @@ page('01 / Foundations','Choose the smallest integration','A capability is a spe
  ('Offer multiple screens','Several tools sharing one ui document','Separate per-tool packages or independent background workers.')],[.29,.34,.37]),
  h('Design a capability budget'),
  p('Write down the input, output and user trigger for each feature. A selection-only JSON formatter needs ui.tools, ui.contextMenus, selection.read and text.transform. It does not need traffic.readSelected unless it displays or reuses request details. A rules-only package needs no HTML or JavaScript.'),
- note('Current boundary','There is no plugin HTTP client, filesystem API, clipboard permission, settings API, persistent state API, asset directory, remote import, signed catalog, automatic updater or API-version negotiation in v1.'),
+ note('Current boundary','There is no plugin HTTP client, filesystem API, clipboard permission, settings API, persistent state API, asset directory, arbitrary remote import, automatic updater or API-version negotiation in v1.'),
  p('If a feature requires one of those facilities, reduce its scope or propose a host API change with explicit permission and lifecycle semantics. Do not reach into parent DOM, private IPC actions or the research browser to simulate the missing feature.'),
 ])
 page('01 / Foundations','Set up a local workspace','Use the repository runtime to validate against the implementation you will ship with.',[
@@ -715,9 +715,9 @@ page('18 / Distribution','Package and release responsibly','The release artifact
  'Known data limits, fidelity caveats, theme policy and supported platforms with testing evidence.',
  'Dependency/license notices, source location and release notes describing changes.'),
  h('Do not promise a distribution feature that is absent'),
- p('The community catalog/backend, signed publisher distribution and automatic updates are deferred. The local installer shows a self-declared publisher. A checksum helps identify a file; it does not by itself authenticate the publisher or establish that the file is safe.'),
+ p('The application supports opt-in community browsing, pinned Ed25519 verification and reviewed upgrades. The backend is deployed separately; live acceptance is tracked in docs/COMMUNITY.md. Local files remain self-declared. A community signature authenticates distribution, not code safety or a manifest author name.'),
  note('Repository licensing','Glasses uses CC BY-NC 4.0 with an additional workplace and consulting permission. Non-commercial sharing and adaptation require attribution; commercial redistribution needs separate permission. Read LICENSE for the full scope and state your own extension package\'s terms clearly.'),
- p('A release can remain entirely offline. Provide the manifest and supporting instructions through your established distribution channel; users install the file and review capabilities locally. Do not add a fake account or update flow to compensate for the missing catalog.'),
+ p('A release can remain entirely offline. Provide the manifest and supporting instructions through your established distribution channel; users install the file and review capabilities locally. Public browsing and installation need no account. Website accounts are used for publishing and moderation; updates still require an explicit capability review.'),
 ])
 page('18 / Distribution','Versioning and maintenance','Stable identity, explicit upgrades and tested compatibility.',[
  table(['Change','Recommended handling'],[
@@ -728,10 +728,10 @@ page('18 / Distribution','Versioning and maintenance','Stable identity, explicit
  ('Host/Electron update','Revalidate schema and rerun actual sandbox, bridge, rendering and package tests.'),
  ('Package rename','Keep the same ID when identity is unchanged; name is presentation, ID is installation identity.'),
  ('Rollback','Remove the new version and reinstall a retained known-good JSON file; re-enable explicitly.')],[.31,.69]),
- p('Version recommendations use major.minor.patch as a convention. The v1 validator enforces only the three numeric components; it does not compare versions, resolve dependencies, prevent downgrades or apply migrations. Do not include -beta or +build suffixes in version.'),
+ p('Use major.minor.patch without -beta or +build suffixes. The base v1 validator checks three numeric components. Community versions additionally reject leading zeros and require an increase for updates. Neither installer resolves dependencies or runs migrations.'),
  h('Treat the API as a versioned boundary'),
  p('Keep assumptions centralized in your context adapter and manifest builder. When the host adds fields, tolerate them in received context, but do not add speculative fields to the strict manifest. There is no negotiated API revision or minHostVersion field in v1; maintain tested compatibility in accompanying release notes.'),
- note('Future proposals are not present APIs','Persistent state, packaged assets, hook workers, integration brokers, signed catalogs and automatic updates are possible future work. Never ship code that depends on these as if they already exist. A proposal should define permission, trust, resource and lifecycle behavior before implementation.'),
+ note('Future proposals are not present APIs','Persistent state, packaged assets, hook workers, integration brokers and automatic updates are possible future work. Never ship code that depends on these as if they already exist. A proposal should define permission, trust, resource and lifecycle behavior before implementation.'),
 ])
 page('19 / Host contributors','Where to extend the host','This chapter is for Glasses maintainers, not installed-plugin runtime code.',[
  table(['Location','Responsibility / change impact'],[

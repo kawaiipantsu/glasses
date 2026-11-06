@@ -28,5 +28,11 @@
     "all_pages_rendered": true,
     "visual_review": "All 59 pages reviewed in contact sheets; representative dense reference, code and accessibility pages reviewed full-size.",
     "bounds_check": "No out-of-page text; layout builder rejects content below its bottom margin."
+  },
+  "community_revision_checks": {
+    "commands": ["npm run check", "npm run test:community"],
+    "result": "passed",
+    "core_tests": 47,
+    "note": "Reverified after community integration. The API v1 tutorial implementation is unchanged."
   }
 }

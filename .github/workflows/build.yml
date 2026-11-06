@@ -23,6 +23,7 @@ jobs:
       - run: npm run native
       - run: npm run check
       - run: npm run test:ui
+      - run: npm run test:community
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         if: always()
         with:

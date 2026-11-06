@@ -102,6 +102,40 @@ export interface PluginManifest {
 export interface Plugin {
   manifest: PluginManifest;
   enabled: boolean;
+  community?: { keyId: string; sha256: string; installedAt: string };
+}
+export interface CommunityIntent {
+  id: string;
+  version: string;
+  nonce: string;
+}
+export interface CommunityEntry {
+  id: string;
+  version: string;
+  name: string;
+  description: string;
+  author: string;
+  kind: 'plugin' | 'extension';
+  publisher: { id: string | number; displayName: string };
+  capabilities: string[];
+  size: number;
+  sha256: string;
+  publishedAt: string;
+  releaseNotes?: string;
+}
+export interface CommunityCatalog {
+  schemaVersion: 1;
+  items: CommunityEntry[];
+  pagination: { page: number; pageSize: number; total: number; totalPages: number };
+}
+export interface CommunityReview {
+  ticket: string;
+  manifest: PluginManifest;
+  sha256: string;
+  keyId: string;
+  expiresAt: number;
+  previousVersion?: string;
+  addedCapabilities: string[];
 }
 export interface Finding {
   header: string;
@@ -140,6 +174,8 @@ export interface Bootstrap {
   version: string;
   dataPath: string;
   warning?: string;
+  installIntent?: CommunityIntent;
+  communityProtocolRegistered: boolean;
 }
 export interface Body {
   text: string;

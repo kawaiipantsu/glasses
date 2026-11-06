@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  ArrowRight,
   Boxes,
   Download,
   FileJson,
@@ -9,7 +8,6 @@ import {
   Puzzle,
   ShieldCheck,
   Trash2,
-  Users,
 } from 'lucide-react';
 import type { Plugin, PluginManifest, Rule } from './types';
 import { CommunityName, Empty, Modal, Pill, SectionHead, Toggle } from './components';
@@ -339,39 +337,6 @@ export function Plugins({
           </div>
         </Modal>
       )}
-    </div>
-  );
-}
-export function Community({ openPlugins }: { openPlugins: () => void }) {
-  return (
-    <div className="tool-page">
-      <SectionHead
-        eyebrow="BUILT TOGETHER"
-        title="Plugin Community"
-        description="The future home for Glasses extensions."
-      />
-      <div className="community-hero">
-        <div className="community-graphic">
-          <Puzzle size={72} strokeWidth={1} />
-          <span className="community-orbit">
-            <Users size={22} />
-          </span>
-        </div>
-        <Pill tone="amber">Coming in a later release</Pill>
-        <h1>
-          One workspace.
-          <br />A community of possibilities.
-        </h1>
-        <p>
-          The community catalog, publishing service, accounts, and update delivery are not connected
-          yet. Local plugins work today.
-        </p>
-        <button className="primary" onClick={openPlugins}>
-          <Puzzle size={16} />
-          Manage local plugins
-          <ArrowRight size={16} />
-        </button>
-      </div>
     </div>
   );
 }

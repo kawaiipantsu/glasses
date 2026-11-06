@@ -16,6 +16,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { pathToFileURL } = require('node:url');
 const { z } = require('zod');
+const { Community, parseInstallUri, fetchBytes } = require('../core/community.cjs');
 const { SystemProxy } = require('../core/system-proxy.cjs');
 const { Secrets } = require('../core/secrets.cjs');
 const { Settings, atomicWrite, schema: settingsSchema } = require('../core/settings.cjs');
@@ -44,10 +45,31 @@ let main,
   securityLog,
   systemProxy,
   relaySecrets,
+  community,
+  installIntent,
+  communityProtocolRegistered = false,
   quitting = false;
 const instanceLock = app.requestSingleInstanceLock();
 if (!instanceLock) app.quit();
-app.on('second-instance', () => {
+function queueInstall(raw) {
+  try {
+    installIntent = { ...parseInstallUri(raw), nonce: crypto.randomUUID() };
+    emit('communityIntent', installIntent);
+    if (main && !main.isDestroyed()) {
+      main.show();
+      main.focus();
+    }
+  } catch {
+    if (main) emit('error', 'Invalid Glasses community install link');
+  }
+}
+app.on('open-url', (event, url) => {
+  event.preventDefault();
+  queueInstall(url);
+});
+app.on('second-instance', (_, argv) => {
+  const uri = argv.find((x) => typeof x === 'string' && x.startsWith('glasses:'));
+  if (uri) queueInstall(uri);
   if (main && !main.isDestroyed()) {
     main.show();
     main.focus();
@@ -209,6 +231,8 @@ function createWindow() {
     main = null;
   });
 }
+const initialInstallUri = process.argv.find((x) => x.startsWith('glasses:'));
+if (initialInstallUri && instanceLock) queueInstall(initialInstallUri);
 app.whenReady().then(async () => {
   if (!instanceLock) return;
   app.dock?.setIcon(appIcon);
@@ -226,6 +250,16 @@ app.whenReady().then(async () => {
   settings = new Settings(dir);
   certificates = new Certificates(dir);
   plugins = new Plugins(dir);
+  community = new Community(plugins, {
+    fetch: (url, maximum) => {
+      if (!settings.value.communityEnabled)
+        throw new Error('Enable community connections to browse or install online packages');
+      return fetchBytes(url, maximum);
+    },
+  });
+  if (app.isPackaged && !process.env.GLASSES_TEST_DATA) {
+    communityProtocolRegistered = app.setAsDefaultProtocolClient('glasses');
+  }
   engine = new Engine(settings, certificates, plugins);
   relaySecrets = new Secrets(dir, safeStorage);
   engine.router.password = (id) => relaySecrets.get(id);
@@ -285,6 +319,7 @@ app.whenReady().then(async () => {
         'pluginInstall',
         'pluginToggle',
         'pluginRemove',
+        'communityInstall',
         'importSession',
         'exportSession',
         'exportHAR',
@@ -312,6 +347,8 @@ app.whenReady().then(async () => {
             version: app.getVersion(),
             dataPath: dir,
             warning: settings.warning,
+            installIntent,
+            communityProtocolRegistered,
           };
         case 'start':
           return await engine.start();
@@ -497,6 +534,23 @@ app.whenReady().then(async () => {
           atomicWrite(rulesPath, rules);
           engine.rules = rules;
           return rules;
+        }
+        case 'communityCatalog':
+          return await community.catalog(value);
+        case 'communityPreview':
+          return await community.preview(value);
+        case 'communityDiscard':
+          community.discard(value);
+          return true;
+        case 'communityDismissIntent':
+          if (installIntent?.nonce === z.string().uuid().parse(value)) installIntent = undefined;
+          return true;
+        case 'communityInstall': {
+          if (!settings.value.communityEnabled)
+            throw new Error('Community connections are disabled');
+          const result = community.install(value);
+          emit('plugins', result);
+          return result;
         }
         case 'pluginPreview': {
           const result = await readDialog([{ name: 'Glasses plugin', extensions: ['json'] }]);

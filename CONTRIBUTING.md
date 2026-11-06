@@ -8,6 +8,7 @@ Use Node.js 24 LTS. Run `npm ci`, then `npm run dev`. The built-in Local lab pro
 
 - `npm run check` validates TypeScript, builds the UI, and runs core/network tests.
 - `npm run test:ui` checks desktop behavior using an isolated profile and ephemeral ports.
+- `npm run test:community` checks signed review, installation, and explicit upgrades with local fixtures.
 - `npm run test:recovery` checks recovery/shutdown behavior without modifying OS proxies.
 - `npm run format:check` verifies formatting.
 

@@ -132,8 +132,10 @@ async function build(platform) {
         await run('ssh', [...args, worker.host, `rm -rf -- ${quote(remote)}`]);
       }
     } else {
-      execFileSync('/usr/bin/tar', ['-xzf', archive, '-C', temp]);
       const args = worker.context ? ['--context', worker.context] : [];
+      // Compile on the container filesystem, not macOS shared storage.
+      const extensions = platform === 'win' ? '*.exe' : '*.deb *.tar.gz';
+      const containerCommand = `mkdir -p /work /artifacts/release && tar -xzf /artifacts/source.tgz -C /work && cd /work && ${command} && cd release && cp ${extensions} /artifacts/release/`;
       await run(
         'docker',
         [
@@ -145,13 +147,19 @@ async function build(platform) {
           '-e',
           'CSC_IDENTITY_AUTO_DISCOVERY=false',
           '-v',
-          `${temp}:/project`,
+          `${temp}:/artifacts`,
+          '-v',
+          'glasses-build-npm:/root/.npm',
+          '-v',
+          'glasses-build-electron:/root/.cache/electron',
+          '-v',
+          'glasses-build-builder:/root/.cache/electron-builder',
           '-w',
-          '/project',
+          '/',
           image,
           'bash',
           '-lc',
-          command,
+          containerCommand,
         ],
         { log: path.join(logDir, platform + '.log') },
       );
