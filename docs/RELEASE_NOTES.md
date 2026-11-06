@@ -38,3 +38,5 @@ The application repository is https://github.com/kawaiipantsu/glasses. The priva
 Implemented opt-in catalog browsing, pinned Ed25519 verification, fixed-origin bounded HTTPS downloads, browser install intents, explicit capability review, disabled or enabled installation, and reviewed upgrades. Eight new tests cover malformed links, signatures, expiry, tampering, capabilities, origin/redirect/size restrictions, race-safe updates, source takeover, downgrade refusal and persistence rollback. A desktop smoke exercises the full flow with ephemeral signed fixtures. The live catalog still returned HTTP 404 during this check; live-server acceptance and platform URL associations remain pending.
 
 Initial GitHub verification, desktop smoke, dependency audit and CodeQL passed for commit c264dab. Hosted package jobs are opt-in and were not run.
+
+CodeQL analysis for the community update completed with 10 open alerts. See [the review](CODEQL-REVIEW.md) for intentional research behavior, existing controls, and two outstanding local filesystem hardening items. No alerts were suppressed or dismissed.

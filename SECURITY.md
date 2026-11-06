@@ -73,3 +73,7 @@ Use an established private THUGSred contact channel for exploitable findings; a 
 ## Community distribution boundary
 
 Online connections require opt-in. The renderer cannot request arbitrary URLs: main builds fixed HTTPS endpoints from validated IDs/versions. It verifies pinned Ed25519 signatures, exact payload bytes, short-lived authorization, identity, capability set, byte length and SHA-256, then applies the plugin validator. Redirects and research-CA trust are refused. Deep links queue a review request without installing code. One-use review tickets remain in main memory; activation requires an explicit install action. Updates cannot replace local-source IDs or downgrade versions, and installation checks that the previous state still matches the review. Failed persistence rolls back in-memory state. See [Community trust details](docs/COMMUNITY.md).
+
+## Static-analysis findings
+
+CodeQL completed for commit `343de4a` with 10 open alerts. [The finding-by-finding review](docs/CODEQL-REVIEW.md) separates intentional proxy/TLS behavior and existing data-boundary controls from two remaining local filesystem hardening items. Alerts were not dismissed or suppressed. A successful analysis workflow is not a zero-findings result or an independent security audit.
