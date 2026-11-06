@@ -120,7 +120,7 @@ The extension API supports **complete tools**, **view-specific context menus**, 
 - [Developer manual — Extension API v1](output/pdf/Glasses-Developer-Manual-API-v1.pdf)
 - [Tutorial companion archive](output/pdf/Glasses-Developer-Manual-Companion.zip)
 
-The Community pane supports catalog browsing, Ed25519-verified downloads, browser install links, and permission-reviewed updates. Connections are opt-in; manual file installation remains available. The live catalog is connected; approved production packages are not yet available. Signed installation is tested with local fixtures. [Installation and trust details →](docs/COMMUNITY.md)
+The Community pane supports catalog browsing, Ed25519-verified downloads, browser install links, and permission-reviewed updates. Connections are opt-in; manual file installation remains available. The four bundled examples are available in the live catalog. Their production signatures, hashes and installation were verified in an isolated packaged macOS profile; fixtures additionally cover update and rejection paths. [Installation and trust details →](docs/COMMUNITY.md)
 
 <details>
 <summary><strong>Preview the Community install flow</strong></summary>

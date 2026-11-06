@@ -1,6 +1,6 @@
 # Authored content. The builder injects the layout helpers and repository paths.
 page('Front matter','Glasses developer manual')
-page('Front matter','About this edition','A practical implementation guide for Glasses 0.1.0 and Extension API v1.',[
+page('Front matter','About this edition','A practical implementation guide for Glasses {{APP_LABEL}} and Extension API v1.',[
  p('This manual explains how to build, test and distribute local Glasses extensions. It covers declarative header rules, response observations, sidebar tools, context-menu actions and the browser-side host bridge. In this repository, <b>plugin</b> and <b>extension</b> describe the same package; <b>SDK</b> means the manifest contract, bridge and examples. There is no separately published SDK dependency to install.'),
  h('Read by outcome'),
  table(['You want to...','Start with...'],[
@@ -11,7 +11,7 @@ page('Front matter','About this edition','A practical implementation guide for G
  ('Review or release a package','Testing, troubleshooting, packaging and release checklist.')],[.36,.64]),
  h('How to read requirements'),
  p('<b>Contract</b> describes behavior enforced or implemented by this source snapshot. <b>Recommendation</b> is guidance proposed by this manual for robust extensions. <b>Boundary</b> identifies unsupported functionality or an implementation limitation. Recommendations do not imply a host validation rule.'),
- note('Source baseline','Reviewed on 6 November 2026. package.json reports 0.1.0. The companion source fingerprint file identifies the reviewed source, including the community client update. The runtime validators take precedence over broad TypeScript types or older prose.'),
+ note('Source baseline','Reviewed on 6 November 2026. Documentation {{DOC_LABEL}} covers Glasses {{APP_LABEL}}. The companion source fingerprint file identifies the reviewed source, including versioned builds and the community client. The runtime validators take precedence over broad TypeScript types or older prose.'),
  p('The examples use local lab data. They do not add a network API or scanner engine. Review destinations and credentials before sending any prepared request. The final chapters distinguish tests run for this manual from previously reported platform verification.'),
 ])
 page('Front matter','Contents / build and integrate','Click a topic or use your PDF viewer bookmarks.')
@@ -641,7 +641,7 @@ npm run test:ui''','Verification commands'),
 ])
 page('16 / Compatibility','Compatibility matrix','Declare tested combinations and explicit limitations.',[
  table(['Dimension','API v1 baseline','Release action'],[
- ('Host/API','Glasses 0.1.0, apiVersion exactly 1.','Validate against the host version you support; retain its source digest or commit.'),
+ ('Host/API','Glasses {{APP_LABEL}}, apiVersion exactly 1.','Validate against the host version you support; retain its source digest or commit.'),
  ('Platforms','Web UI and manifest format are portable in design.','Test each OS/architecture you claim; do not infer runtime support from build configuration.'),
  ('macOS','Release notes report local ARM64 desktop/package execution; x64 packages were built.','An x64 build alone is not an Intel hardware test.'),
  ('Windows/Linux','Packaging targets exist; release notes do not report executed platform jobs.','Mark unverified until you exercise real packaged builds.'),
@@ -650,7 +650,7 @@ page('16 / Compatibility','Compatibility matrix','Declare tested combinations an
  ('Data','Optional context; base64 bodies; string or array headers.','Test empty, incomplete, binary, compressed and truncated cases.'),
  ('Lifecycle','No persistent extension storage API or background runtime.','Test reload, navigation, disable, removal and replacement.')],[.21,.41,.38]),
  p('The repository describes platform packaging and earlier verification separately. This manual adds a current local test of the companion tool and records it in the verification appendix. It does not expand the platform support claim to systems that were not exercised.'),
- note('A useful support statement','"Tested with Glasses 0.1.0 / API v1 on macOS ARM64. Fixed dark extension theme. Selected UTF-8 JSON up to 256 KiB. No persistence; no automatic sending." Replace these details with evidence from your own release.'),
+ note('A useful support statement','"Tested with Glasses {{APP_LABEL}} / API v1 on macOS ARM64. Fixed dark extension theme. Selected UTF-8 JSON up to 256 KiB. No persistence; no automatic sending." Replace these details with evidence from your own release.'),
  source('package.json; docs/RELEASE_NOTES.md; companion verification record.'),
 ])
 page('16 / Compatibility','Protocol and capture boundaries','Do not let a polished extension overstate what the host observed.',[

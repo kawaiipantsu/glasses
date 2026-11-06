@@ -2,7 +2,7 @@
 
 Open **Community → Connect and browse** to allow requests to `https://glasses.thugs.red`. No account is required for public browsing and installation. Connections are off by default and can be disabled in **Settings → Plugins & community**. Searches and package identifiers go to the service; captured traffic does not.
 
-The application-side client is implemented. On 6 November 2026, the production HTTPS catalog returned a valid empty catalog through both the core client and the Electron UI: no packages had been approved yet. Signed local fixtures exercise the complete review/install/update UI; they are test data. Installation of a production-signed package remains to be verified when an approved package is available.
+The application-side client is implemented. On 6 November 2026, Data Lens, Research headers, JSON Workbench and Lab Marker were published through the production community service. All four production signatures/hashes and installations passed in an isolated packaged macOS profile. JSON Workbench formatting and its host text-preview bridge were also exercised. Signed local fixtures cover review/install/update and rejection paths. Browser-to-application OS handoff remains a manual acceptance item.
 
 ## Install and update
 

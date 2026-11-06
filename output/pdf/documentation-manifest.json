@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "documentation": {
+    "version": "1.0.0",
+    "build": 1,
+    "applicationVersion": "0.8.1",
+    "applicationBuild": 33
+  },
+  "displayVersion": "1.0.0 (1)",
+  "artifacts": [
+    {
+      "filename": "Glasses-User-Manual-1.0.0-build.1.pdf",
+      "alias": "Glasses-User-Manual.pdf",
+      "bytes": 3664351,
+      "sha256": "79c7fb8e821aac98e273c8ebf9b68431478924cdc0c186bda05364fb067b48f4"
+    },
+    {
+      "filename": "Glasses-Product-Overview-1.0.0-build.1.pdf",
+      "alias": "Glasses-Product-Overview.pdf",
+      "bytes": 960501,
+      "sha256": "ff3aa8d3afc7606b82b0c1f18509ca673cc5b855269f075ca29ac7e10fb25ba8"
+    },
+    {
+      "filename": "Glasses-Developer-Manual-API-v1-1.0.0-build.1.pdf",
+      "alias": "Glasses-Developer-Manual-API-v1.pdf",
+      "bytes": 431324,
+      "sha256": "34aada46c266b58e0008370d452622e21b8a247f8882972ead2643f8b349115d"
+    },
+    {
+      "filename": "Glasses-Developer-Manual-Companion-1.0.0-build.1.zip",
+      "alias": "Glasses-Developer-Manual-Companion.zip",
+      "bytes": 72252,
+      "sha256": "d5fbaf0f13c6e60b1a80f9c65c8c16134885cbdf65c7b28b4c1587560cd4dad1"
+    }
+  ]
+}

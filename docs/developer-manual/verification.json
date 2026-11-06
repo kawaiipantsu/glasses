@@ -40,5 +40,11 @@
     "desktop_smoke": "passed",
     "density_journey": "70 local requests and six extension menu entries; custom preview, save and workspace application passed",
     "live_catalog": "Core HTTPS client and Electron UI connected to empty production catalog"
+  },
+  "versioning_revision_checks": {
+    "application": "0.8.1 (33)",
+    "documentation": "1.0.0 (1)",
+    "core_tests": 51,
+    "version_tests": "Independent counters, native metadata synchronization, reservation lock, numeric bounds and HAR identity passed"
   }
 }

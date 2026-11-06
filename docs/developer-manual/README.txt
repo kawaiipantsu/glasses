@@ -1,5 +1,5 @@
 GLASSES DEVELOPER MANUAL - API v1
-Edition: 6 November 2026 | Host: Glasses 0.1.0
+Documentation: 1.0.0 (1) | Host: Glasses 0.8.1 (33) | API v1
 
 The PDF is output/pdf/Glasses-Developer-Manual-API-v1.pdf.
 The companion archive preserves repository-relative paths. Extract it into a

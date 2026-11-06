@@ -13,6 +13,10 @@ from reportlab.lib.utils import ImageReader
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 OUT = ROOT / 'output/pdf/Glasses-Developer-Manual-API-v1.pdf'
+VERSIONS = json.loads((ROOT/'version.json').read_text())
+DOC = VERSIONS['documentation']
+APP_LABEL = f"{DOC['applicationVersion']} ({DOC['applicationBuild']})"
+DOC_LABEL = f"{DOC['version']} ({DOC['build']})"
 font_candidates = [
     Path(os.environ.get('GLASSES_MANUAL_FONT_DIR', '/nonexistent')),
     Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/LibreOfficeDev.app/Contents/Resources/fonts/truetype',
@@ -52,13 +56,13 @@ def sourcecode(name,start=None,end=None,label=None):
     lines=(HERE/'examples'/name).read_text().splitlines()
     return code('\n'.join(lines[slice(start,end)]), label or name, 8.0)
 
-exec((HERE/'manual_content.py').read_text(),globals())
+exec((HERE/'manual_content.py').read_text().replace('{{APP_LABEL}}', APP_LABEL).replace('{{DOC_LABEL}}', DOC_LABEL),globals())
 
 class Book:
     def __init__(self):
         OUT.parent.mkdir(parents=True,exist_ok=True)
         self.c=canvas.Canvas(str(OUT),pagesize=(W,H),pageCompression=1)
-        self.c.setTitle('Glasses Developer Manual | Extension API v1')
+        self.c.setTitle(f'Glasses Developer Manual {DOC_LABEL} | App {APP_LABEL} | API v1')
         self.c.setAuthor('THUGSred Glasses | Developer documentation')
         self.c.setSubject('SDK, plugins, examples, developer journeys, coding standards, UI/UX and compatibility')
         self.c.setKeywords('Glasses, THUGSred, SDK, API v1, plugins, extensions, developer manual')
@@ -129,7 +133,7 @@ class Book:
         c.setFillColor(RED); c.rect(0,H-15,W,15,fill=1,stroke=0)
         c.setFont('Sans-Bold',11); c.setFillColor(colors.white); c.drawString(M,H-67,'THUGS')
         c.setFillColor(colors.HexColor('#ff666e')); c.drawString(M+44,H-67,'red')
-        c.setFont('Sans',10); c.setFillColor(colors.HexColor('#bdc4d0')); c.drawRightString(W-M,H-67,'DEVELOPER EDITION / 01')
+        c.setFont('Sans',10); c.setFillColor(colors.HexColor('#bdc4d0')); c.drawRightString(W-M,H-67,f'DOCUMENTATION {DOC_LABEL}')
         logo=ROOT/'docs/brand/glasses-preview.png'
         im=ImageReader(str(logo)); iw,ih=im.getSize(); dw=345; dh=dw*ih/iw
         c.drawImage(im,M+40,H-180-dh,width=dw,height=dh,mask='auto')
@@ -142,7 +146,7 @@ class Book:
                                  'Design accessible interfaces. Ship compatible packages.']):
             c.setFont('Sans',11); c.drawString(M,247-i*19,line)
         c.setFillColor(colors.HexColor('#ff858c')); c.setFont('Sans-Bold',10)
-        c.drawString(M,131,'GLASSES 0.1.0  /  EXTENSION API v1')
+        c.drawString(M,131,f'GLASSES {APP_LABEL}  /  EXTENSION API v1')
         c.setFillColor(colors.HexColor('#b0b8c6')); c.setFont('Sans',9)
         c.drawString(M,109,'Source-reviewed edition • 6 November 2026')
         c.drawString(M,65,'Practical journeys + complete example + API reference + release checklist')
@@ -176,7 +180,7 @@ class Book:
             self.metrics.append({'page':i,'title':q['title'],'content_bottom':round(self.y,1)})
             c.setStrokeColor(LINE); c.line(M,49,W-M,49)
             c.setFillColor(MUTED); c.setFont('Sans',7.3)
-            c.drawString(M,34,'GLASSES / DEVELOPER MANUAL / API v1')
+            c.drawString(M,34,f'DOCS {DOC_LABEL} / GLASSES {APP_LABEL} / API v1')
             c.drawRightString(W-M,34,f'{i:02} / {n:02}')
             c.showPage()
         c.save()
