@@ -13,3 +13,7 @@ The application imports `build/glasses-mark.svg`. `npm run icons` derives it fro
 After editing the logo in Affinity, export the whole 1200 × 440 document to `Glasses-Red-Shades.svg` with **Export text as curves** enabled and no rasterized elements. Run `npm run icons`, inspect the output at small sizes, and rebuild packages. Update the icon master to match any geometry changes.
 
 Keep **THUGS** in the theme foreground and **red** in red. Neither the wordmark suffix nor the sunglasses should follow user accent palettes.
+
+The application’s **Glasses** title uses Megrim Regular 400, bundled locally at `src/assets/fonts/megrim-400.woff2`. Its approved treatment is `letter-spacing: -0.05em` and `-webkit-text-stroke: 0.35px currentColor`. Use it for the brand title only; UI labels and body text retain the standard typeface. The original font copyright and SIL Open Font License are preserved in `LICENSES/OFL-Megrim.txt`.
+
+Request/response views can use the separately bundled [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono). Its unmodified Regular WOFF2 and OFL license are stored in the application assets and `LICENSES/OFL-JetBrains-Mono.txt`. Data font settings do not alter the brand wordmark.

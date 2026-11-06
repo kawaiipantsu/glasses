@@ -50,6 +50,7 @@ import Repeater, { Intercept, type RepeaterSeed } from './Repeater';
 import { HeaderInspector, Timeline, TLSInspector } from './Inspectors';
 import { Plugins, Rules } from './Extensions';
 import Community from './Community';
+import { workspaceStyle } from './appearance';
 import type { CommunityIntent } from './types';
 import Settings from './Settings';
 import PluginView, { type ExtensionContext } from './PluginView';
@@ -399,6 +400,7 @@ export default function App() {
   return (
     <div
       className={`app ${dark ? 'dark' : 'light'} palette-${settings.palette} density-${settings.density}`}
+      style={workspaceStyle(settings)}
     >
       <header className={`titlebar ${data.platform === 'darwin' ? 'mac' : ''}`}>
         <div className="titlebar-brand">

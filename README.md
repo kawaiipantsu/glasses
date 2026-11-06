@@ -115,7 +115,7 @@ The extension API supports **complete tools**, **view-specific context menus**, 
 - [Developer manual — Extension API v1](output/pdf/Glasses-Developer-Manual-API-v1.pdf)
 - [Tutorial companion archive](output/pdf/Glasses-Developer-Manual-Companion.zip)
 
-The Community pane supports catalog browsing, Ed25519-verified downloads, browser install links, and permission-reviewed updates. Connections are opt-in; manual file installation remains available. The website service is deployed separately, and live catalog acceptance is pending. [Installation and trust details →](docs/COMMUNITY.md)
+The Community pane supports catalog browsing, Ed25519-verified downloads, browser install links, and permission-reviewed updates. Connections are opt-in; manual file installation remains available. The live catalog is connected; approved production packages are not yet available. Signed installation is tested with local fixtures. [Installation and trust details →](docs/COMMUNITY.md)
 
 <details>
 <summary><strong>Preview the Community install flow</strong></summary>
@@ -142,6 +142,20 @@ Captured HTML and JavaScript stay inert in the inspector. The application render
 Security is ongoing engineering work. See [SECURITY.md](SECURITY.md) for specifics and private reporting guidance. Version 0.1 is not independently audited or presented as an enterprise-hardened product.
 
 Current boundaries: HTTP/1.1 inspection; SOCKS5 TCP tunnels with metadata; WebSocket upgrade passthrough without frame editing. HTTP/2/3, UDP, NTLM/Kerberos, and PAC execution are not implemented. Header checks are advisory and Timeline measures proxy observations, not browser rendering.
+
+## A workspace that fits real traffic
+
+Tighter rows and sidebar spacing leave room for busy captures and community tools. **Settings → Appearance → Workspace density & text** offers Standard, Compact and Custom spacing, request/response fonts, text size, line height and header padding, with a preview before saving.
+
+<details>
+<summary><strong>70 local requests, six example extensions, and adjustable typography</strong></summary>
+
+![Dense workspace with six example extension entries](docs/screenshots/dense-workspace.png)
+![Workspace density and request text settings](docs/screenshots/density-settings.png)
+
+These are local test requests and example menu entries, not bundled production extensions.
+
+</details>
 
 ## Contribute
 

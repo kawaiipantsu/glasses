@@ -2,7 +2,7 @@
 
 Open **Community → Connect and browse** to allow requests to `https://glasses.thugs.red`. No account is required for public browsing and installation. Connections are off by default and can be disabled in **Settings → Plugins & community**. Searches and package identifiers go to the service; captured traffic does not.
 
-The application-side client is implemented. At the time of local verification, the separately deployed catalog returned HTTP 404. Signed local fixtures exercise the complete review/install/update UI; they are test data, not claims of a live catalog. Service availability and live verification will be recorded in the release notes.
+The application-side client is implemented. On 6 November 2026, the production HTTPS catalog returned a valid empty catalog through both the core client and the Electron UI: no packages had been approved yet. Signed local fixtures exercise the complete review/install/update UI; they are test data. Installation of a production-signed package remains to be verified when an approved package is available.
 
 ## Install and update
 

@@ -24,6 +24,12 @@ import {
 import type { Bootstrap, SettingsValue } from './types';
 import { Brand, CommunityName, Modal, Pill, SectionHead, Toggle } from './components';
 import { ProxySettings } from './ProxySettings';
+import {
+  effectiveSpacing,
+  spacingPresets,
+  workspaceStyle,
+  type WorkspaceSpacing,
+} from './appearance';
 import { copy } from './utils';
 const categories = [
   { id: 'general', label: 'General', icon: Settings2 },
@@ -79,6 +85,12 @@ export default function Settings({
   const dirty = JSON.stringify(draft) !== JSON.stringify(saved);
   const set = <K extends keyof SettingsValue>(key: K, value: SettingsValue[K]) =>
     setDraft({ ...draft, [key]: value });
+  const spacing = effectiveSpacing(draft);
+  const setSpacing = (key: keyof WorkspaceSpacing, value: number) => {
+    const next = { ...spacing, [key]: value };
+    next.codeLineHeight = Math.max(14, next.codeLineHeight, next.codeFontSize + 2);
+    setDraft({ ...draft, ...next, density: 'custom' });
+  };
   const save = async () => {
     setSaving(true);
     const result = await invoke<{ settings: SettingsValue; restartRequired: boolean }>(
@@ -242,20 +254,101 @@ export default function Settings({
                   ))}
                 </div>
               </div>
-              <div className="settings-group">
+              <div className="settings-group density-settings">
+                <h3>Workspace density &amp; text</h3>
+                <p>
+                  Fit more requests, headers and extension tools on screen. Preview changes below,
+                  then save.
+                </p>
                 <Row
                   title="Interface density"
-                  description="Compact mode fits more requests and headers on screen."
+                  description="Changing an individual spacing value selects Custom."
                 >
                   <select
                     aria-label="Interface density"
                     value={draft.density}
-                    onChange={(e) => set('density', e.target.value as SettingsValue['density'])}
+                    onChange={(e) => {
+                      const density = e.target.value as SettingsValue['density'];
+                      setDraft({
+                        ...draft,
+                        ...(density === 'custom' ? spacing : spacingPresets[density]),
+                        density,
+                      });
+                    }}
                   >
-                    <option value="comfortable">Comfortable</option>
+                    <option value="comfortable">Standard</option>
                     <option value="compact">Compact</option>
+                    <option value="custom">Custom</option>
                   </select>
                 </Row>
+                <Row
+                  title="Request / response font"
+                  description="Used for headers, bodies, raw/hex views and request editors."
+                >
+                  <select
+                    aria-label="Request / response font"
+                    value={draft.codeFont}
+                    onChange={(e) => set('codeFont', e.target.value as SettingsValue['codeFont'])}
+                  >
+                    <option value="system">System monospace</option>
+                    <option value="jetbrains">JetBrains Mono (bundled)</option>
+                    <option value="nerd">JetBrains Nerd Font (installed)</option>
+                  </select>
+                </Row>
+                {draft.codeFont === 'nerd' && (
+                  <p className="font-help">
+                    Uses your installed JetBrainsMono Nerd Font Mono. If unavailable, the bundled
+                    JetBrains Mono is used. Fonts are loaded locally.
+                  </p>
+                )}
+                {(
+                  [
+                    ['trafficRowHeight', 'Traffic row height', 24, 44],
+                    ['sidebarRowHeight', 'Sidebar item height', 26, 44],
+                    ['codeFontSize', 'Request / response font size', 10, 16],
+                    [
+                      'codeLineHeight',
+                      'Request / response line height',
+                      Math.max(14, spacing.codeFontSize + 2),
+                      30,
+                    ],
+                    ['headerRowPadding', 'Header row padding', 0, 12],
+                  ] as const
+                ).map(([key, label, min, max]) => (
+                  <Row key={key} title={label}>
+                    <div className="density-control">
+                      <input
+                        type="range"
+                        aria-label={label}
+                        min={min}
+                        max={max}
+                        step="1"
+                        value={spacing[key]}
+                        onChange={(e) => setSpacing(key, Number(e.target.value))}
+                      />
+                      <output>{spacing[key]} px</output>
+                    </div>
+                  </Row>
+                ))}
+                <div
+                  className="density-preview"
+                  style={workspaceStyle(draft)}
+                  aria-label="Workspace text preview"
+                >
+                  <div className="density-preview-nav">
+                    <Puzzle size={16} /> Example extension tool
+                  </div>
+                  <div className="density-preview-row">
+                    <code>GET</code> /api/example <span>200</span>
+                  </div>
+                  <div className="header-row">
+                    <span>content-type</span>
+                    <span>application/json</span>
+                  </div>
+                  <pre className="density-preview-code">
+                    {'{\n  "status": "ready",\n  "requests": 128\n}'}
+                  </pre>
+                </div>
               </div>
             </>
           )}

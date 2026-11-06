@@ -39,7 +39,13 @@ export interface TrafficRecord {
 export interface SettingsValue {
   theme: 'system' | 'dark' | 'light';
   palette: 'red' | 'violet' | 'ocean' | 'amber';
-  density: 'comfortable' | 'compact';
+  density: 'comfortable' | 'compact' | 'custom';
+  trafficRowHeight: number;
+  sidebarRowHeight: number;
+  codeFont: 'system' | 'jetbrains' | 'nerd';
+  codeFontSize: number;
+  codeLineHeight: number;
+  headerRowPadding: number;
   proxyPort: number;
   socksPort: number;
   socksEnabled: boolean;

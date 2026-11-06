@@ -6,7 +6,7 @@ The implementation follows the approved charcoal/red design with a dedicated Set
 
 ## Verification
 
-- Node integration/security suite: **47 passing tests**, covering actual local HTTP and HTTPS, CONNECT MITM, request/response interception and mutation, drop handling, oversized response streaming, decompression/HAR, rewrite/plugin behavior, replay payload iteration/cancellation, fragmented SOCKS5 negotiation, upstream TLS inspection, header findings, IPC caller validation, hostile property names, decompression bombs and private metadata logs.
+- Node integration/security suite: **48 passing tests**, covering actual local HTTP and HTTPS, CONNECT MITM, request/response interception and mutation, drop handling, oversized response streaming, decompression/HAR, rewrite/plugin behavior, replay payload iteration/cancellation, fragmented SOCKS5 negotiation, upstream TLS inspection, header findings, IPC caller validation, hostile property names, decompression bombs and private metadata logs.
 - Desktop smoke: launched Electron on macOS arm64, loaded real local lab traffic, inspected bodies, opened response context menus and transformation previews, changed light/dark settings, replayed and fuzzed requests, visited Timeline/Header Hardening, installed/enabled a custom tool extension, and tested its isolation and Repeater/context-menu handoffs.
 - Hardened packaged app: ARM64 ASAR startup, production origin despite a development URL environment variable, real local proxy traffic, custom extension tool and Settings passed. Native mouse activation inside the extension was also checked in the packaged app.
 - Dependency audit: **0 known vulnerabilities** in the checked runtime and development lockfile. Scoped minimatch overrides avoid a build-tool glob denial-of-service advisory without changing old minimatch consumers to an incompatible API. Unused direct dependencies were removed.
@@ -35,8 +35,16 @@ The application repository is https://github.com/kawaiipantsu/glasses. The priva
 
 ## Community client
 
-Implemented opt-in catalog browsing, pinned Ed25519 verification, fixed-origin bounded HTTPS downloads, browser install intents, explicit capability review, disabled or enabled installation, and reviewed upgrades. Eight new tests cover malformed links, signatures, expiry, tampering, capabilities, origin/redirect/size restrictions, race-safe updates, source takeover, downgrade refusal and persistence rollback. A desktop smoke exercises the full flow with ephemeral signed fixtures. The live catalog still returned HTTP 404 during this check; live-server acceptance and platform URL associations remain pending.
+Implemented opt-in catalog browsing, pinned Ed25519 verification, fixed-origin bounded HTTPS downloads, browser install intents, explicit capability review, disabled or enabled installation, and reviewed upgrades. Eight new tests cover malformed links, signatures, expiry, tampering, capabilities, origin/redirect/size restrictions, race-safe updates, source takeover, downgrade refusal and persistence rollback. A desktop smoke exercises the full flow with ephemeral signed fixtures. The core HTTPS client and Electron UI both connected to the production empty catalog on 6 November 2026. No approved production package is available yet; production-signed installation and platform URL associations remain pending.
 
 Initial GitHub verification, desktop smoke, dependency audit and CodeQL passed for commit c264dab. Hosted package jobs are opt-in and were not run.
 
 CodeQL analysis for the community update completed with 10 open alerts. See [the review](CODEQL-REVIEW.md) for intentional research behavior, existing controls, and two outstanding local filesystem hardening items. No alerts were suppressed or dismissed.
+
+## Brand typography
+
+The Glasses brand title uses locally bundled Megrim Regular 400 with the approved 0.35px outline and -0.05em tracking. UI text keeps the existing readable system typeface. The font retains its SIL Open Font License in LICENSES/OFL-Megrim.txt.
+
+## Dense workspace and typography
+
+Reduced default traffic, inspector and navigation spacing. Appearance now offers Standard, Compact and Custom presets, bounded row/line-height and font-size controls, header padding, a live draft preview, and a small monospace font selector. Megrim and JetBrains Mono are bundled under their original OFL licenses; the optional Nerd Font uses a local installation with a bundled fallback. Verified with 70 actual local requests and six example extension menu entries at 1360 × 900, plus custom preview/save/application and settings migration/validation checks.

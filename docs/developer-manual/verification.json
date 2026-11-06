@@ -34,5 +34,11 @@
     "result": "passed",
     "core_tests": 47,
     "note": "Reverified after community integration. The API v1 tutorial implementation is unchanged."
+  },
+  "appearance_revision_checks": {
+    "core_tests": 48,
+    "desktop_smoke": "passed",
+    "density_journey": "70 local requests and six extension menu entries; custom preview, save and workspace application passed",
+    "live_catalog": "Core HTTPS client and Electron UI connected to empty production catalog"
   }
 }

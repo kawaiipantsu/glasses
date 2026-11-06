@@ -9,6 +9,38 @@ const { cleanHeaders } = require('../core/engine.cjs');
 const { headersObject } = require('../core/inspectors.cjs');
 const { decodedBody } = require('../core/formats.cjs');
 const { pluginSchema } = require('../core/plugins.cjs');
+test('workspace appearance settings migrate defaults and reject unsafe or unreadable values', (t) => {
+  const { Settings, schema } = require('../core/settings.cjs');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'glasses-appearance-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  fs.writeFileSync(
+    path.join(dir, 'settings.json'),
+    JSON.stringify({ theme: 'light', density: 'compact' }),
+  );
+  const settings = new Settings(dir);
+  assert.equal(settings.value.theme, 'light');
+  assert.equal(settings.value.codeFont, 'system');
+  settings.update({
+    ...settings.value,
+    density: 'custom',
+    trafficRowHeight: 26,
+    codeFont: 'jetbrains',
+    codeFontSize: 14,
+    codeLineHeight: 19,
+  });
+  const loaded = new Settings(dir).value;
+  assert.equal(loaded.trafficRowHeight, 26);
+  assert.equal(loaded.codeFont, 'jetbrains');
+  assert.equal(loaded.codeLineHeight, 19);
+  for (const input of [
+    { codeFont: 'url(https://example.com/font)' },
+    { trafficRowHeight: 0 },
+    { sidebarRowHeight: 1000 },
+    { codeFontSize: 16, codeLineHeight: 14 },
+    { headerRowPadding: -1 },
+  ])
+    assert.equal(schema.safeParse(input).success, false);
+});
 test('IPC trust includes window identity, top frame and exact application origin', () => {
   const frame = { url: 'glasses://app/index.html' };
   const contents = { mainFrame: frame };

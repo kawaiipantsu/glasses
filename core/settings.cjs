@@ -7,7 +7,13 @@ const schema = z
   .object({
     theme: z.enum(['system', 'dark', 'light']).default('system'),
     palette: z.enum(['red', 'violet', 'ocean', 'amber']).default('red'),
-    density: z.enum(['comfortable', 'compact']).default('comfortable'),
+    density: z.enum(['comfortable', 'compact', 'custom']).default('comfortable'),
+    trafficRowHeight: z.number().int().min(24).max(44).default(28),
+    sidebarRowHeight: z.number().int().min(26).max(44).default(30),
+    codeFont: z.enum(['system', 'jetbrains', 'nerd']).default('system'),
+    codeFontSize: z.number().int().min(10).max(16).default(12),
+    codeLineHeight: z.number().int().min(14).max(30).default(17),
+    headerRowPadding: z.number().int().min(0).max(12).default(4),
     proxyPort: z.number().int().min(1024).max(65535).default(8080),
     socksPort: z.number().int().min(1024).max(65535).default(1080),
     socksEnabled: z.boolean().default(true),
@@ -31,6 +37,10 @@ const schema = z
     communityEnabled: z.boolean().default(false),
   })
   .strict()
+  .refine(
+    (s) => s.codeLineHeight >= s.codeFontSize + 2,
+    'Text line height must leave room for the font',
+  )
   .refine(
     (s) => !s.socksEnabled || s.proxyPort !== s.socksPort,
     'Proxy and SOCKS ports must differ',

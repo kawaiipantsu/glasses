@@ -44,7 +44,7 @@ Select **Local lab** to create real traffic against a test server running on you
 - Header Hardening: advisory CSP, CORS, HSTS, nosniff, framing, referrer/permissions/isolation headers, cookie flags and disclosure checks.
 - Header rewrite rules and visible applied-rule provenance.
 - View-specific context menus, cross-tool transfers, UTF-8 URL/Base64/hex/HTML/JSON transformations with previews.
-- Dedicated Settings pane, OS-following light/dark modes, four accent palettes, density, ports, scope, timeouts, capture limits and export paths.
+- Dedicated Settings pane, OS-following light/dark modes, four accent palettes, Standard/Compact/Custom density, request/response font and line height, ports, scope, timeouts, capture limits and export paths.
 - Native session and HAR import/export; body and public certificate export.
 - Local plugins: header rules/checks, complete sidebar tools with HTML/CSS/JavaScript, and context-menu contributions. See the [plugin SDK](../plugin-sdk/README.md).
 
@@ -134,3 +134,11 @@ Request bodies exceeding the configured limit are rejected. Larger responses con
 Header findings are context-dependent advice, not proof of exploitability. Local extension publishers are self-declared. Community catalog browsing, signed package verification and reviewed updates are implemented; live service acceptance is tracked separately. Automatic updates are deferred. Plugins receive no direct Node, filesystem, network or unrestricted IPC access.
 
 This is a usable first release for iteration and testing. Further protocol coverage, performance profiling, independent security review, signed distribution and enterprise deployment controls remain before describing it as an enterprise-hardened product.
+
+## Workspace density and request text
+
+Open **Settings → Appearance → Workspace density & text**. Standard uses 28px traffic rows, 30px sidebar items and 12px request/response text on 17px lines. Compact uses 24px rows, 26px menu items and 11px text on 15px lines. Adjusting a slider selects Custom; the preview shows unsaved changes and **Save changes** applies them to the workspace.
+
+Custom controls cover traffic row height (24–44px), sidebar item height (26–44px), request/response font size (10–16px), text line height (14–30px, at least 2px above font size), and header row padding (0–12px per side). Header/body/raw/hex panes and Repeater/interception editors share the typography. Ligatures are disabled to preserve individual character shapes.
+
+Choose System monospace, bundled JetBrains Mono, or a locally installed JetBrainsMono Nerd Font Mono. The Nerd option falls back to bundled JetBrains Mono when unavailable. Fonts load locally; no arbitrary CSS or remote font URLs are accepted. The Megrim Glasses wordmark is separate from these data fonts.

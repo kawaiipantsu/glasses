@@ -4,3 +4,7 @@
 *.icns binary
 *.ico binary
 *.zip binary
+*.woff2 binary
+
+# Keep upstream font license files verbatim, including their line-end spaces.
+LICENSES/OFL-*.txt whitespace=-blank-at-eol
